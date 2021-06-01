@@ -14,9 +14,10 @@ menu_tecla = ""
 tecla_submenu = ""
 total_alquilos = []
 valor_total_alquilado = 0
-arr_pelis = [pelicula1] ##OBJETOS DE LA PELICULA 5 ACCIÓN/SUPERHEROES, 5 TERROR, 5 NIÑOS/FICCION y 5 DRAMA/COMEDIA
+arr_pelis = [pelicula1] 
+##OBJETOS DE LAS PELICULAS: 5 ACCIÓN/SUPERHEROES, 5 TERROR, 5 NIÑOS/FICCION y 5 DRAMA/COMEDIA
 
-print(arr_pelis[0].nombre)
+print(arr_pelis[0].nombre) # Print para probar si se han añadido bien los objetos
 
 def final():
     status = False
