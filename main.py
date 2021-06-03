@@ -1,5 +1,6 @@
 # Importamos la librería OS para usar SYSTEM y poder limpiar pantalla
 import os
+import copy
 
 class Pelicula:  # CLASE INICIALIZADORA DE PELICULAS, NOMBRE Y GENERO SON DATOS DE TIPO STRING, AÑO ES TIPO ENTERO Y PRECIO DE TIPO FLOTANTE
     def __init__(self, nombre, genero, anio, precio):
@@ -146,13 +147,12 @@ def fil_pre(p_max):
 
 def fil_nombre(nom):
     arr_filtro = []
-    copy_arr = arr_pelis
+    copy_arr = copy.deepcopy(arr_pelis)
     nom = nom.lower()
     for i in range(len(copy_arr)):
         copy_arr[i].nombre = copy_arr[i].nombre.lower()
         if (copy_arr[i].nombre.find(nom) >= 0 or copy_arr[i].nombre == nom):
             arr_filtro.append(arr_pelis[i].nombre)
-            print(arr_pelis[i].nombre)
     else:
         print("Coinciden con la busqueda de \'", nom, "\' : ", arr_filtro)
     del arr_filtro
