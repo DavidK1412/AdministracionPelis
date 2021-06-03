@@ -110,6 +110,8 @@ def filtrar_peliculas():
         opcion_submenu = input("Ingrese el precio máximo de alquiler (con un .): ")
         opcion_submenu = float(opcion_submenu)
         fil_pre(opcion_submenu)
+    #elif opcion_submenu == 3:
+
 
 def fil_gen(inp):
     inp = inp.lower() #Convertimos cualquier cadena en minusculas
@@ -123,11 +125,14 @@ def fil_gen(inp):
     filtrar_peliculas()
 
 def fil_pre(p_max):
+    text_fil_pre = ""
     for i in range(len(arr_pelis)):
         if (arr_pelis[i].precio <= p_max):
-            arr_filtro.append(arr_pelis[i].nombre)
+            text_fil_pre = arr_pelis[i].nombre + " con el precio de: $" + str(arr_pelis[i].precio)
+            arr_filtro.append(text_fil_pre)
     else:
         print("Tenemos ", (len(arr_filtro)), " peliculas de menor o igual precio de ", p_max, " disponibles :", arr_filtro)
     arr_pelis.clear()
     filtrar_peliculas()
+
 menu()
