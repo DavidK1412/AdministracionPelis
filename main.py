@@ -54,18 +54,23 @@ def limpiar_pantalla():
 #Función para mostrar las películas disponibles
 def mostrar_peliculas():
     limpiar_pantalla()
+    print("===================Películas disponibles=================")
     print()
     for i in range(cantidad_peliculas):
         print(f"Película #{i + 1}: Título:", arr_pelis[i].nombre, " Genero:", arr_pelis[i].genero, " Año:", arr_pelis[i].anio, " Valor:", "$", arr_pelis[i].precio)
         print("-------------------------------------------------------------------------------------------------------")
+    
+    print("Digite 1 Para alquilar una película")
+    print("Digite 0 Para volver al menú")
+    menu_tecla = int(input("Digite una opción: "))
 
-'''def final():
-    status = False
-    print(total_alquilos)'''
+    return menu_tecla
+
+
 
 #Función para el desplegar el menú principal
-opcion_menu = 0
 def menu():
+    opcion_menu = 0
     # Llamada a la función de limpiar pantalla
     limpiar_pantalla()
 
@@ -76,18 +81,18 @@ def menu():
     print("Digite 2 para filtrar las películas disponibles")
     print("Digite 3 para alquilar una película")
     print("Digite 0 para salir")
-    menu_tecla = int(input("Digite una opción: "))
+    opcion_menu = int(input("Digite una opción: "))
 
     #Condición para mostrar el listado de películas
-    if menu_tecla == 1:
+    if opcion_menu == 1:
         mostrar_peliculas()
-    elif menu_tecla == 2:
+    elif opcion_menu == 2:
         filtrar_peliculas()
-    elif menu_tecla == 0:
+    elif opcion_menu == 0:
         print("Gracias por utilizar nuestro sistema, ¡vuelva pronto!")
 
-opcion_submenu = 0
 def filtrar_peliculas():
+    opcion_submenu = 0
     # Llamada a la función de limpiar pantalla
     limpiar_pantalla()
 
