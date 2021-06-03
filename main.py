@@ -1,6 +1,6 @@
 # Importamos la librería OS para usar SYSTEM y poder limpiar pantalla
 import os
-import copy
+import copy # Libreria para copiar
 
 class Pelicula:  # CLASE INICIALIZADORA DE PELICULAS, NOMBRE Y GENERO SON DATOS DE TIPO STRING, AÑO ES TIPO ENTERO Y PRECIO DE TIPO FLOTANTE
     def __init__(self, nombre, genero, anio, precio):
@@ -114,6 +114,10 @@ def filtrar_peliculas():
         opcion_submenu = input("Ingrese el precio máximo de alquiler (sin .): ")
         opcion_submenu = int(opcion_submenu)
         fil_pre(opcion_submenu)
+    elif opcion_submenu == 3:
+        opcion_submenu = input("Ingrese el año que desea consultar las peliculas: ")
+        opcion_submenu = int(opcion_submenu)
+        fil_anio(opcion_submenu)
     elif opcion_submenu == 4:
         opcion_submenu = input("Ingrese el nombre de la pelicula que busca (o una parte): ")
         fil_nombre(opcion_submenu)
@@ -140,11 +144,22 @@ def fil_pre(p_max):
             text_fil_pre = arr_pelis[i].nombre + " con el precio de: $" + str(arr_pelis[i].precio)
             arr_filtro.append(text_fil_pre)
     else:
-        print("Tenemos ", (len(arr_filtro)), " peliculas de menor o igual precio de ", p_max, " disponibles :", arr_filtro)
+        print("Tenemos ", (len(arr_filtro)), " pelicula(s) de menor o igual precio de ", p_max, " disponibles :", arr_filtro)
     del arr_filtro
     opcion_submenu = int(input("Digite 0 para volver: "))
     if opcion_submenu == 0: filtrar_peliculas()
 
+def fil_anio(anio):
+    text_fil_an = ""
+    arr_filtro = []
+    for i in range(len(arr_pelis)):
+        if (arr_pelis[i].anio == anio):
+            text_fil_an = arr_pelis[i].nombre + " del año: " + str(arr_pelis[i].anio)
+            arr_filtro.append(text_fil_an)
+    else: print("Tenemos ", len(arr_filtro), "pelicula(s) del año: ", anio, " : ", arr_filtro)
+    del arr_filtro
+    opcion_submenu = int(input("Digite 0 para volver: "))
+    if opcion_submenu == 0: filtrar_peliculas()
 def fil_nombre(nom):
     arr_filtro = []
     copy_arr = copy.deepcopy(arr_pelis)
