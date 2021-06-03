@@ -1,3 +1,6 @@
+# Importamos la librería OS para usar SYSTEM y poder limpiar pantalla
+import os
+
 class Pelicula:  # CLASE INICIALIZADORA DE PELICULAS, NOMBRE Y GENERO SON DATOS DE TIPO STRING, AÑO ES TIPO ENTERO Y PRECIO DE TIPO FLOTANTE
     def __init__(self, nombre, genero, anio, precio):
         self.nombre = nombre
@@ -37,13 +40,20 @@ arr_pelis = [pelicula1,
              pelicula11]
 
 status = True
-opcion_menu = 0
-tecla_submenu = ""
 total_alquilos = []
 valor_total_alquilado = 0
 
+# Función para limpiar pantalla
+def limpiar_pantalla():
+    if os.name == "posix":
+        var = "clear"
+    elif os.name == "ce" or os.name == "nt" or os.name == "dos":
+        var = "cls"
+    os.system(var)
+
 #Función para mostrar las películas disponibles
 def mostrar_peliculas():
+    limpiar_pantalla()
     print()
     for i in range(cantidad_peliculas):
         print(f"Película #{i + 1}: Título:", arr_pelis[i].nombre, " Genero:", arr_pelis[i].genero, " Año:", arr_pelis[i].anio, " Valor:", "$", arr_pelis[i].precio)
@@ -54,25 +64,43 @@ def mostrar_peliculas():
     print(total_alquilos)'''
 
 #Función para el desplegar el menú principal
+opcion_menu = 0
 def menu():
+    # Llamada a la función de limpiar pantalla
+    limpiar_pantalla()
+
+    print("-----------------------------------------------------")
     print("------- Menú Principal -------------")
     print()
-    print("Digite 1 para conocer las películas disponibles")
-    print("Ingrese 2 para comenzar a filtrar")
-    print("Ingrese 3 para alquilar")
-    print("Ingrese 0 para salir")
+    print("Digite 1 para ver todas las películas disponibles")
+    print("Digite 2 para filtrar las películas disponibles")
+    print("Digite 3 para alquilar una película")
+    print("Digite 0 para salir")
     menu_tecla = int(input("Digite una opción: "))
 
     #Condición para mostrar el listado de películas
     if menu_tecla == 1:
         mostrar_peliculas()
+    elif menu_tecla == 2:
+        filtrar_peliculas()
+    elif menu_tecla == 0:
+        print("Gracias por utilizar nuestro sistema, ¡vuelva pronto!")
 
+opcion_submenu = 0
+def filtrar_peliculas():
+    # Llamada a la función de limpiar pantalla
+    limpiar_pantalla()
 
-
-'''def filtrar_peliculas():
-    print("Ingrese 1 para mostrar los nombres de las peliculas")
-    print("Ingrese 2 para comenzar a filtrar")
-    print("Ingrese 3 para alquilar")
+    print("-----------------------------------------------------")
+    print("------- Filtro de películas -------------")
+    print()
+    print("Digite 1 para ver las películas de acción")
+    print("Digite 2 para ver las películas de terror")
+    print("Digite 3 para ver las películas Infantiles")
     print("Ingrese 0 para volver")
-##while status == True:'''
+    opcion_submenu = int(input("Por favor, digite una opción: "))
+
+    if opcion_submenu == 0:
+        menu()
+
 menu()
