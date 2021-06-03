@@ -55,17 +55,20 @@ def limpiar_pantalla():
 #Función para mostrar las películas disponibles
 def mostrar_peliculas():
     limpiar_pantalla()
-    print("===================Películas disponibles=================")
+    peliculas_disponibles = []
+    copy_arr = copy.deepcopy(arr_pelis)
+    for j in range(len(copy_arr)):
+        if copy_arr[j].cantidad != 0:
+            peliculas_disponibles.append(arr_pelis)
+            
     print()
-    for i in range(cantidad_peliculas_vista_user):
-        print(f"Película #{i + 1}: Título:", arr_pelis[i].nombre, " Genero:", arr_pelis[i].genero, " Año:", arr_pelis[i].anio, " Valor:", "$", arr_pelis[i].precio)
-        print("-------------------------------------------------------------------------------------------------------")
-    
-    print("Digite 1 Para alquilar una película")
-    print("Digite 0 Para volver al menú")
-    menu_tecla = int(input("Digite una opción: "))
-'''    if menu_tecla == 1:
-        alquilar()'''
+    print(f"\t Total películas disponibles {len(peliculas_disponibles)}")
+    print("-------------------------------------------------------------------------------------------------------")
+    for j in range(len(peliculas_disponibles)):
+            print(f"\t {j+1}. Título:", arr_pelis[j].nombre, " Genero:", arr_pelis[j].genero, " Año:", arr_pelis[j].anio, " Valor:", "$", arr_pelis[j].precio)
+            print("-------------------------------------------------------------------------------------------------------")
+    pelicula_aleatoria()
+    del peliculas_disponibles
 
 
 
