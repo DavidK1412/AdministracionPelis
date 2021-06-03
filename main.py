@@ -49,174 +49,33 @@ peliculas_alquiladas = []
 valor_total_alquilado = []
 input_string = ""
 arr_filtro = []
-# Función para limpiar pantalla
+
+#===================== INICIO LIMPIAR PANTALLA =================================
 def limpiar_pantalla():
     if os.name == "posix":
         var = "clear"
     elif os.name == "ce" or os.name == "nt" or os.name == "dos":
         var = "cls"
     os.system(var)
+#==================== FIN LIMPIAR PANTALLA =====================================
 
-#Función para mostrar las películas disponibles
-def peliculas_disponibles():
-    limpiar_pantalla()
-    peliculas_disponibles = []
+#==================== INICIO PELÍCULA RECOMENDADA ==============================
+def pelicula_aleatoria():
+    peliculas_ale = []
     copy_arr = copy.deepcopy(arr_pelis)
     for j in range(len(copy_arr)):
         if copy_arr[j].cantidad != 0:
-            peliculas_disponibles.append(arr_pelis)
-            
+            peliculas_ale.append(arr_pelis)
+
+    print("Película recomendada del día")
+    print("======================================")
+    print(f" \tTítulo:", arr_pelis[numero_aleatorio].nombre, "\n \tGenero:", arr_pelis[numero_aleatorio].genero, "\n \tAño:", arr_pelis[numero_aleatorio].anio, "\n \tValor:", "$", arr_pelis[numero_aleatorio].precio)
     print()
-    print(f"\t Total películas disponibles {len(peliculas_disponibles)}")
-    print("-------------------------------------------------------------------------------------------------------")
-    for j in range(len(peliculas_disponibles)):
-            print(f"\t {j+1}. Título:", arr_pelis[j].nombre, " Genero:", arr_pelis[j].genero, " Año:", arr_pelis[j].anio, " Valor:", "$", arr_pelis[j].precio)
-            print("-------------------------------------------------------------------------------------------------------")
-    pelicula_aleatoria()
-    del peliculas_disponibles
+#====================== FIN PELÍCULA RECOMENDADA ===============================
 
-#Función para el desplegar el menú principal
-def menu():
-    # Llamada a la función de limpiar pantalla
-    limpiar_pantalla()
-    print("-----------------------------------------------------")
-    print("------- Menú Principal -------------\n")
-    print("Digite 1 para ver todas las películas disponibles")
-    print("Digite 2 para filtrar las películas disponibles")
-    print("Digite 3 para alquilar una película")
-    print("Digite 0 para salir")
-    opcion = int(input("Digite una opción: "))
+#================== INICIO ALQUILAR PELÍCULA ===================================
 
-    #Condición para mostrar el listado de películas
-    if opcion == 1:
-        peliculas_disponibles()
-        print("Digite 1 si desea alquilar películas")
-        print("Digite 0 si desea volver")
-        opcion2 = int(input("Digite una opción: "))
-        if opcion2 == 1:
-            alquilar_pelicula()
-        elif opcion2 ==0:
-            menu()
-    elif opcion == 2:
-        filtrar_peliculas()
-    elif opcion == 3:
-        menu_alquilar()
-    elif opcion == 0:
-        print("Gracias por utilizar nuestro sistema, ¡vuelva pronto!")
-
-def filtrar_peliculas():
-    # Llamada a la función de limpiar pantalla
-    limpiar_pantalla()
-    print("-----------------------------------------------------")
-    print("------- Filtro de películas ------------- \n")
-    print("Digite 1 para ver las peliculas según su genero")
-    print("Digite 2 para ver las películas en un rango de precio")
-    print("Digite 3 para ver las películas por año")
-    print("Digite 4 para ver las peliculas por nombre")
-    print("Ingrese 0 para volver")
-    opcion = int(input("Por favor, digite una opción: "))
-
-    if opcion == 0:
-        menu()
-    elif opcion == 1:
-        input_string = input("Ingrese el genero que busca en nuestro catalogo: ")
-        fil_gen(input_string)
-    elif opcion == 2:
-        opcion = int(input("Ingrese el precio máximo de alquiler (sin .): "))
-        fil_pre(opcion)
-    elif opcion == 3:
-        opcion = int(input("Ingrese el año que desea consultar las peliculas: "))
-        fil_anio(opcion)
-    elif opcion == 4:
-        opcion_submenu = input("Ingrese el nombre de la pelicula que busca (o una parte): ")
-        fil_nombre(opcion)
-
-#Función con el filtro de películas por género
-def fil_gen(inp):
-    arr_filtro = []
-    inp = inp.lower() #Convertimos cualquier cadena en minusculas
-    inp = inp.capitalize() #Hacemos que se cambie la primera letra en mayusculas
-
-    for i in range(len(arr_pelis)):
-        if (arr_pelis[i].genero == inp):
-            arr_filtro.append(arr_pelis[i].nombre)
-    else:
-        print()
-        print("Coinciden", len(arr_filtro), "películas con:", "'"+inp+"'")
-        print("-------------------------------------------------------")
-        print()
-        for j in range(len(arr_filtro)):
-            print(f"\t {j + 1}", arr_filtro[j])
-        print()
-
-    del arr_filtro
-    opcion_submenu = int(input("Digite 0 para volver: "))
-    if opcion_submenu == 0: filtrar_peliculas()
-
-#Función con filtrado de películas por precio
-def fil_pre(p_max):
-    arr_filtro = []
-    text_fil_pre = ""
-    for i in range(len(arr_pelis)):
-        if (arr_pelis[i].precio <= p_max):
-            text_fil_pre = arr_pelis[i].nombre + " con el precio de: $" + str(arr_pelis[i].precio)
-            arr_filtro.append(text_fil_pre)
-    else:
-        print()
-        print("Coinciden", len(arr_filtro)," películas con precio menor o igual a:", p_max)
-        print("---------------------------------------------------")
-        print()
-        for j in range(len(arr_filtro)):
-            print(f"\t {j + 1}.", arr_filtro[j])
-        print()
-
-    del arr_filtro
-    opcion_submenu = int(input("Digite 0 para volver: "))
-    if opcion_submenu == 0: filtrar_peliculas()
-
-#Función con filtrado de películas por año
-def fil_anio(anio):
-    text_fil_an = ""
-    arr_filtro = []
-    for i in range(len(arr_pelis)):
-        if (arr_pelis[i].anio == anio):
-            text_fil_an = arr_pelis[i].nombre + " del año: " + str(arr_pelis[i].anio)
-            arr_filtro.append(text_fil_an)
-    else: 
-        print()
-        print("Coinciden", len(arr_filtro), "películas con:", anio)
-        print("----------------------------------------------")
-        print()
-        for j in range(len(arr_filtro)):
-            print(f"\t{j + 1}", arr_filtro[j])
-        print()
-
-    del arr_filtro
-    opcion_submenu = int(input("Digite 0 para volver: "))
-    if opcion_submenu == 0: filtrar_peliculas()
-
-#Función de filtrado de películas por nombre    
-def fil_nombre(nom):
-    arr_filtro = []
-    copy_arr = copy.deepcopy(arr_pelis)
-    nom = nom.lower()
-    for i in range(len(copy_arr)):
-        copy_arr[i].nombre = copy_arr[i].nombre.lower()
-        if (copy_arr[i].nombre.find(nom) >= 0 or copy_arr[i].nombre == nom):
-            arr_filtro.append(arr_pelis[i].nombre)
-    else:
-        print()
-        print("Coinciden", len(arr_filtro), "películas con:", "'" + nom + "'" )
-        print("------------------------------------")
-        print()
-        for j in range (len(arr_filtro)):
-            print(f"\t {j + 1}." , arr_filtro[j])
-        print()
-
-    del arr_filtro
-    opcion_submenu = int(input("Digite 0 para volver: "))
-    if opcion_submenu == 0: filtrar_peliculas()
-
+#---------------------- INICIO MENÚ ALQUILAR -----------------------------------
 def menu_alquilar():
     limpiar_pantalla()
     pelicula_aleatoria()
@@ -232,7 +91,9 @@ def menu_alquilar():
         alquilar_pelicula()
     elif opcion == 0:
         menu()
+#---------------------- FIN MENÚ ALQUILAR --------------------------------------
 
+#--------------------- INICIO FUNCIÓN SELECCIONAR PELÍCULA ---------------------
 def alquilar_pelicula():
     peliculas_disponibles()
     i = 1
@@ -267,7 +128,9 @@ def alquilar_pelicula():
         suma += valor_total_alquilado[i]
 
     mostrar_total(suma)
+#------------------ FIN FUNCIÓN SELECCIONAR PELÍCULA ---------------------------
 
+#------------------ INICIO FUNCIÓN MOSTRAR FACTURA -----------------------------
 def mostrar_total(total):
     contar_pelis = 0
     for i in range(len(valor_total_alquilado)):
@@ -281,17 +144,179 @@ def mostrar_total(total):
     opcion = int(input("Digite 0 para volver al menú principal: "))
     if opcion == 0:
         menu()
+#--------------- FIN FUNCIÓN MOSTRAR FACTURA -----------------------------------
 
-def pelicula_aleatoria():
-    peliculas_ale = []
+#======================= FIN ALQUILAR PELÍCULA =================================
+
+#===================== INICIO FILTRADO DE PELÍCULAS ============================
+
+#--------------------- INICO FUNCIÓN FILTRAR PELÍCULAS -------------------------
+def filtrar_peliculas():
+    # Llamada a la función de limpiar pantalla
+    limpiar_pantalla()
+    print("-----------------------------------------------------")
+    print("------- Filtro de películas ------------- \n")
+    print("Digite 1 para ver las peliculas según su genero")
+    print("Digite 2 para ver las películas en un rango de precio")
+    print("Digite 3 para ver las películas por año")
+    print("Digite 4 para ver las peliculas por nombre")
+    print("Ingrese 0 para volver")
+    opcion = int(input("Por favor, digite una opción: "))
+
+    if opcion == 0:
+        menu()
+    elif opcion == 1:
+        input_string = input("Ingrese el genero que busca en nuestro catalogo: ")
+        fil_gen(input_string)
+    elif opcion == 2:
+        opcion = int(input("Ingrese el precio máximo de alquiler (sin .): "))
+        fil_pre(opcion)
+    elif opcion == 3:
+        opcion = int(input("Ingrese el año que desea consultar las peliculas: "))
+        fil_anio(opcion)
+    elif opcion == 4:
+        opcion_submenu = input("Ingrese el nombre de la pelicula que busca (o una parte): ")
+        fil_nombre(opcion)
+#----------------------- FIN FUNCIÓN FILTRAR PELÍCULAS -------------------------
+
+#---------------------- INICIO FUNCIÓN FILTRADO POR GÉNERO ---------------------
+def fil_gen(inp):
+    arr_filtro = []
+    inp = inp.lower() #Convertimos cualquier cadena en minusculas
+    inp = inp.capitalize() #Hacemos que se cambie la primera letra en mayusculas
+
+    for i in range(len(arr_pelis)):
+        if (arr_pelis[i].genero == inp):
+            arr_filtro.append(arr_pelis[i].nombre)
+    else:
+        print()
+        print("Coinciden", len(arr_filtro), "películas con:", "'"+inp+"'")
+        print("-------------------------------------------------------")
+        print()
+        for j in range(len(arr_filtro)):
+            print(f"\t {j + 1}", arr_filtro[j])
+        print()
+
+    del arr_filtro
+    opcion_submenu = int(input("Digite 0 para volver: "))
+    if opcion_submenu == 0: filtrar_peliculas()
+#------------------ FIN FUNCIÓN FILTRADO POR GÉNERO ----------------------------
+
+#----------------- INICIO FUNCIÓN FILTRADO POR PRECIO --------------------------
+def fil_pre(p_max):
+    arr_filtro = []
+    text_fil_pre = ""
+    for i in range(len(arr_pelis)):
+        if (arr_pelis[i].precio <= p_max):
+            text_fil_pre = arr_pelis[i].nombre + " con el precio de: $" + str(arr_pelis[i].precio)
+            arr_filtro.append(text_fil_pre)
+    else:
+        print()
+        print("Coinciden", len(arr_filtro)," películas con precio menor o igual a:", p_max)
+        print("---------------------------------------------------")
+        print()
+        for j in range(len(arr_filtro)):
+            print(f"\t {j + 1}.", arr_filtro[j])
+        print()
+
+    del arr_filtro
+    opcion_submenu = int(input("Digite 0 para volver: "))
+    if opcion_submenu == 0: filtrar_peliculas()
+#------------------ FIN FUNCIÓN FILTRADO POR PRECIO ----------------------------
+
+#------------------- INICIO FUNCIÓN FILTRADO POR AÑO ---------------------------
+def fil_anio(anio):
+    text_fil_an = ""
+    arr_filtro = []
+    for i in range(len(arr_pelis)):
+        if (arr_pelis[i].anio == anio):
+            text_fil_an = arr_pelis[i].nombre + " del año: " + str(arr_pelis[i].anio)
+            arr_filtro.append(text_fil_an)
+    else: 
+        print()
+        print("Coinciden", len(arr_filtro), "películas con:", anio)
+        print("----------------------------------------------")
+        print()
+        for j in range(len(arr_filtro)):
+            print(f"\t{j + 1}", arr_filtro[j])
+        print()
+
+    del arr_filtro
+    opcion_submenu = int(input("Digite 0 para volver: "))
+    if opcion_submenu == 0: filtrar_peliculas()
+#-------------------------- FIN FUNCIÓN FILTRADO POR AÑO -----------------------
+
+#------------------------ INICIO FUNCIÓN FILTRADO POR NOMBRE -------------------   
+def fil_nombre(nom):
+    arr_filtro = []
+    copy_arr = copy.deepcopy(arr_pelis)
+    nom = nom.lower()
+    for i in range(len(copy_arr)):
+        copy_arr[i].nombre = copy_arr[i].nombre.lower()
+        if (copy_arr[i].nombre.find(nom) >= 0 or copy_arr[i].nombre == nom):
+            arr_filtro.append(arr_pelis[i].nombre)
+    else:
+        print()
+        print("Coinciden", len(arr_filtro), "películas con:", "'" + nom + "'" )
+        print("------------------------------------")
+        print()
+        for j in range (len(arr_filtro)):
+            print(f"\t {j + 1}." , arr_filtro[j])
+        print()
+
+    del arr_filtro
+    opcion_submenu = int(input("Digite 0 para volver: "))
+    if opcion_submenu == 0: filtrar_peliculas()
+#------------------------ FIN FUNCIÓN FILTRADO POR NOMBRE ----------------------
+
+#========================= FIN FILTRADO DE PELÍCULAS ===========================
+
+#============== INICIO PELÍCULAS DISPONIBLES ===========================
+def peliculas_disponibles():
+    limpiar_pantalla()
+    peliculas_disponibles = []
     copy_arr = copy.deepcopy(arr_pelis)
     for j in range(len(copy_arr)):
         if copy_arr[j].cantidad != 0:
-            peliculas_ale.append(arr_pelis)
-
-    print("Película recomendada del día")
-    print("======================================")
-    print(f" \tTítulo:", arr_pelis[numero_aleatorio].nombre, "\n \tGenero:", arr_pelis[numero_aleatorio].genero, "\n \tAño:", arr_pelis[numero_aleatorio].anio, "\n \tValor:", "$", arr_pelis[numero_aleatorio].precio)
+            peliculas_disponibles.append(arr_pelis)
+            
     print()
+    print(f"\t Total películas disponibles {len(peliculas_disponibles)}")
+    print("-------------------------------------------------------------------------------------------------------")
+    for j in range(len(peliculas_disponibles)):
+            print(f"\t {j+1}. Título:", arr_pelis[j].nombre, " Genero:", arr_pelis[j].genero, " Año:", arr_pelis[j].anio, " Valor:", "$", arr_pelis[j].precio)
+            print("-------------------------------------------------------------------------------------------------------")
+    pelicula_aleatoria()
+    del peliculas_disponibles
+# ==================== FIN PELÍCULAS DISPONIBLES =======================
+
+#==================== INICIO MENÚ PRINCIPAL ========================
+def menu():
+    limpiar_pantalla()
+    print("-----------------------------------------------------")
+    print("------- Menú Principal -------------\n")
+    print("Digite 1 para ver todas las películas disponibles")
+    print("Digite 2 para filtrar las películas disponibles")
+    print("Digite 3 para alquilar una película")
+    print("Digite 0 para salir")
+    opcion = int(input("Digite una opción: "))
+
+    #Condición para mostrar el listado de películas
+    if opcion == 1:
+        peliculas_disponibles()
+        print("Digite 1 si desea alquilar películas")
+        print("Digite 0 si desea volver")
+        opcion2 = int(input("Digite una opción: "))
+        if opcion2 == 1:
+            alquilar_pelicula()
+        elif opcion2 ==0:
+            menu()
+    elif opcion == 2:
+        filtrar_peliculas()
+    elif opcion == 3:
+        menu_alquilar()
+    elif opcion == 0:
+        print("Gracias por utilizar nuestro sistema, ¡vuelva pronto!")
+#======================= FIN MENÚ PRINCIPAL ====================================
 
 menu()
