@@ -154,7 +154,7 @@ def fil_pre(p_max):
             arr_filtro.append(text_fil_pre)
     else:
         print()
-        print("Coinciden", len(arr_filtro)," peliculas con precio menor o igual a:", p_max)
+        print("Coinciden", len(arr_filtro)," películas con precio menor o igual a:", p_max)
         print("---------------------------------------------------")
         print()
         for j in range(len(arr_filtro)):
@@ -203,7 +203,7 @@ def fil_nombre(nom):
         for j in range (len(arr_filtro)):
             print(f"\t {j + 1}." , arr_filtro[j])
         print()
-        
+
     del arr_filtro
     opcion_submenu = int(input("Digite 0 para volver: "))
     if opcion_submenu == 0: filtrar_peliculas()
