@@ -12,26 +12,26 @@ class Pelicula:  # CLASE INICIALIZADORA DE PELICULAS, NOMBRE Y GENERO SON DATOS 
 cantidad_peliculas_vista_user = 20 # Será para mostrarle al usuario, podemos usar el método len() para obtener los indices de la lista arr_pelis
 
 # Añadimos las películas
-pelicula1 = Pelicula("Spiderman", "Superheroes", 2002, 10.000)  # Eliminados los puntos al final de cada titulo/genero, facilitará el manejo de los Strings
-pelicula2 = Pelicula("Venom: Let There Be Carnage", "Superheroes", 2021, 20.000)
-pelicula3 = Pelicula("Rapidos y Furiosos 4", "Acción", 2009, 12.000)
-pelicula4 = Pelicula("La caida del Halcón negro", "Acción", 2001, 13.000)
-pelicula5 = Pelicula("Sherlock Holmes", "Aventura", 2009, 15.000)
-pelicula6 = Pelicula("Divergente", "Acción", 2014, 14.000)
-pelicula7 = Pelicula("Wonder Woman", "Acción", 2020, 18.000)
-pelicual8 = Pelicula("Coco", "Infantil", 2017, 15.000)
-pelicual9 = Pelicula("Soul", "Infantil", 2020, 16.000)
-pelicula10 = Pelicula("El libro de la vida", "Infantil", 2014, 12.000)
-pelicula11 = Pelicula("El Conjuro 3: el diablo me obligó a hacerlo", "Terror", 2021, 20.000)
-pelicula12 = Pelicula("REC", "Terror", 2007, 11.000)
-pelicula13 = Pelicula("¿Y dónde están las rubias?", "Comedia", 2004, 10.000)
-pelicula14 = Pelicula("Supercool", "Comedia", 2007, 10.000)
-pelicula15 = Pelicula("No se metan con Zohan", "Comedia", 2008, 12.000)
-pelicula16 = Pelicula("Indiana Jones y la última cruzada", "Aventura", 1989, 10.000)
-pelicula17 = Pelicula("Jumanji: En la selva", "Aventura", 2017, 16.000)
-pelicula18 = Pelicula("El gran Gatsby", "Drama", 2013, 13.000)
-pelicula19 = Pelicula("Perfume: La historia de un asesino","Drama", 2006, 11.000)
-pelicula20 = Pelicula("El tigre blanco", "Drama", 2021, 20.000)
+pelicula1 = Pelicula("Spiderman", "Superheroes", 2002, 10000)  # Eliminados los puntos al final de cada titulo/genero, facilitará el manejo de los Strings
+pelicula2 = Pelicula("Venom: Let There Be Carnage", "Superheroes", 2021, 20000)
+pelicula3 = Pelicula("Rapidos y Furiosos 4", "Acción", 2009, 12000)
+pelicula4 = Pelicula("La caida del Halcón negro", "Acción", 2001, 13000)
+pelicula5 = Pelicula("Sherlock Holmes", "Aventura", 2009, 15000)
+pelicula6 = Pelicula("Divergente", "Acción", 2014, 14000)
+pelicula7 = Pelicula("Wonder Woman", "Acción", 2020, 18000)
+pelicual8 = Pelicula("Coco", "Infantil", 2017, 15000)
+pelicual9 = Pelicula("Soul", "Infantil", 2020, 16000)
+pelicula10 = Pelicula("El libro de la vida", "Infantil", 2014, 12000)
+pelicula11 = Pelicula("El Conjuro 3: el diablo me obligó a hacerlo", "Terror", 2021, 20000)
+pelicula12 = Pelicula("REC", "Terror", 2007, 11000)
+pelicula13 = Pelicula("¿Y dónde están las rubias?", "Comedia", 2004, 10000)
+pelicula14 = Pelicula("Supercool", "Comedia", 2007, 10000)
+pelicula15 = Pelicula("No se metan con Zohan", "Comedia", 2008, 12000)
+pelicula16 = Pelicula("Indiana Jones y la última cruzada", "Aventura", 1989, 10000)
+pelicula17 = Pelicula("Jumanji: En la selva", "Aventura", 2017, 16000)
+pelicula18 = Pelicula("El gran Gatsby", "Drama", 2013, 13000)
+pelicula19 = Pelicula("Perfume: La historia de un asesino","Drama", 2006, 11000)
+pelicula20 = Pelicula("El tigre blanco", "Drama", 2021, 20000)
 
 
 #Arreglo para guardar las películas
@@ -110,25 +110,29 @@ def filtrar_peliculas():
         input_string = input("Ingrese el genero que busca en nuestro catalogo: ")
         fil_gen(input_string)
     elif opcion_submenu == 2:
-        opcion_submenu = input("Ingrese el precio máximo de alquiler (con un .): ")
-        opcion_submenu = float(opcion_submenu)
+        opcion_submenu = input("Ingrese el precio máximo de alquiler (sin .): ")
+        opcion_submenu = int(opcion_submenu)
         fil_pre(opcion_submenu)
     elif opcion_submenu == 4:
         opcion_submenu = input("Ingrese el nombre de la pelicula que busca (o una parte): ")
         fil_nombre(opcion_submenu)
 
 def fil_gen(inp):
+    arr_filtro = []
     inp = inp.lower() #Convertimos cualquier cadena en minusculas
     inp = inp.capitalize() #Hacemos que se cambie la primera letra en mayusculas
 
     for i in range(len(arr_pelis)):
         if (arr_pelis[i].genero == inp):
             arr_filtro.append(arr_pelis[i].nombre)
-    else: print("Tenemos ", (len(arr_filtro)), " peliculas de ", inp.lower(), " disponibles :", arr_filtro)
-    arr_filtro.clear()
-    filtrar_peliculas()
+    else:
+        print("Tenemos ", (len(arr_filtro)), " peliculas de ", inp.lower(), " disponibles :", arr_filtro)
+    del arr_filtro
+    opcion_submenu = int(input("Digite 0 para volver: "))
+    if opcion_submenu == 0: filtrar_peliculas()
 
 def fil_pre(p_max):
+    arr_filtro = []
     text_fil_pre = ""
     for i in range(len(arr_pelis)):
         if (arr_pelis[i].precio <= p_max):
@@ -136,18 +140,22 @@ def fil_pre(p_max):
             arr_filtro.append(text_fil_pre)
     else:
         print("Tenemos ", (len(arr_filtro)), " peliculas de menor o igual precio de ", p_max, " disponibles :", arr_filtro)
-    arr_filtro.clear()
-    filtrar_peliculas()
+    del arr_filtro
+    opcion_submenu = int(input("Digite 0 para volver: "))
+    if opcion_submenu == 0: filtrar_peliculas()
 
 def fil_nombre(nom):
+    arr_filtro = []
     copy_arr = arr_pelis
     nom = nom.lower()
     for i in range(len(copy_arr)):
         copy_arr[i].nombre = copy_arr[i].nombre.lower()
-        if (copy_arr[i].nombre.find(nom) >= 1 or copy_arr[i].nombre == nom):
+        if (copy_arr[i].nombre.find(nom) >= 0 or copy_arr[i].nombre == nom):
             arr_filtro.append(arr_pelis[i].nombre)
+            print(arr_pelis[i].nombre)
     else:
         print("Coinciden con la busqueda de \'", nom, "\' : ", arr_filtro)
-    arr_filtro.clear()
-    filtrar_peliculas()
+    del arr_filtro
+    opcion_submenu = int(input("Digite 0 para volver: "))
+    if opcion_submenu == 0: filtrar_peliculas()
 menu()
