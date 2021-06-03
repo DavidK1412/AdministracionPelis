@@ -122,6 +122,7 @@ def filtrar_peliculas():
         opcion_submenu = input("Ingrese el nombre de la pelicula que busca (o una parte): ")
         fil_nombre(opcion_submenu)
 
+#Función con el filtro de películas por género
 def fil_gen(inp):
     arr_filtro = []
     inp = inp.lower() #Convertimos cualquier cadena en minusculas
@@ -131,11 +132,19 @@ def fil_gen(inp):
         if (arr_pelis[i].genero == inp):
             arr_filtro.append(arr_pelis[i].nombre)
     else:
-        print("Tenemos ", (len(arr_filtro)), " peliculas de ", inp.lower(), " disponibles :", arr_filtro)
+        print()
+        print("Coinciden", len(arr_filtro), "películas con:", "'"+inp+"'")
+        print("-------------------------------------------------------")
+        print()
+        for j in range(len(arr_filtro)):
+            print(f"\t {j + 1}", arr_filtro[j])
+        print()
+
     del arr_filtro
     opcion_submenu = int(input("Digite 0 para volver: "))
     if opcion_submenu == 0: filtrar_peliculas()
 
+#Función con filtrado de películas por precio
 def fil_pre(p_max):
     arr_filtro = []
     text_fil_pre = ""
@@ -144,11 +153,19 @@ def fil_pre(p_max):
             text_fil_pre = arr_pelis[i].nombre + " con el precio de: $" + str(arr_pelis[i].precio)
             arr_filtro.append(text_fil_pre)
     else:
-        print("Tenemos ", (len(arr_filtro)), " pelicula(s) de menor o igual precio de ", p_max, " disponibles :", arr_filtro)
+        print()
+        print("Coinciden", len(arr_filtro)," peliculas con precio menor o igual a:", p_max)
+        print("---------------------------------------------------")
+        print()
+        for j in range(len(arr_filtro)):
+            print(f"\t {j + 1}.", arr_filtro[j])
+        print()
+
     del arr_filtro
     opcion_submenu = int(input("Digite 0 para volver: "))
     if opcion_submenu == 0: filtrar_peliculas()
 
+#Función con filtrado de películas por año
 def fil_anio(anio):
     text_fil_an = ""
     arr_filtro = []
@@ -156,10 +173,20 @@ def fil_anio(anio):
         if (arr_pelis[i].anio == anio):
             text_fil_an = arr_pelis[i].nombre + " del año: " + str(arr_pelis[i].anio)
             arr_filtro.append(text_fil_an)
-    else: print("Tenemos ", len(arr_filtro), "pelicula(s) del año: ", anio, " : ", arr_filtro)
+    else: 
+        print()
+        print("Coinciden", len(arr_filtro), "películas con:", anio)
+        print("----------------------------------------------")
+        print()
+        for j in range(len(arr_filtro)):
+            print(f"\t{j + 1}", arr_filtro[j])
+        print()
+
     del arr_filtro
     opcion_submenu = int(input("Digite 0 para volver: "))
     if opcion_submenu == 0: filtrar_peliculas()
+
+#Función de filtrado de películas por nombre    
 def fil_nombre(nom):
     arr_filtro = []
     copy_arr = copy.deepcopy(arr_pelis)
@@ -169,7 +196,14 @@ def fil_nombre(nom):
         if (copy_arr[i].nombre.find(nom) >= 0 or copy_arr[i].nombre == nom):
             arr_filtro.append(arr_pelis[i].nombre)
     else:
-        print("Coinciden con la busqueda de \'", nom, "\' : ", arr_filtro)
+        print()
+        print("Coinciden", len(arr_filtro), "películas con:", "'" + nom + "'" )
+        print("------------------------------------")
+        print()
+        for j in range (len(arr_filtro)):
+            print(f"\t {j + 1}." , arr_filtro[j])
+        print()
+        
     del arr_filtro
     opcion_submenu = int(input("Digite 0 para volver: "))
     if opcion_submenu == 0: filtrar_peliculas()
