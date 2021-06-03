@@ -63,8 +63,8 @@ def mostrar_peliculas():
     print("Digite 1 Para alquilar una película")
     print("Digite 0 Para volver al menú")
     menu_tecla = int(input("Digite una opción: "))
-
-    return menu_tecla
+'''    if menu_tecla == 1:
+        alquilar()'''
 
 
 
@@ -75,8 +75,7 @@ def menu():
     limpiar_pantalla()
 
     print("-----------------------------------------------------")
-    print("------- Menú Principal -------------")
-    print()
+    print("------- Menú Principal -------------\n")
     print("Digite 1 para ver todas las películas disponibles")
     print("Digite 2 para filtrar las películas disponibles")
     print("Digite 3 para alquilar una película")
@@ -97,8 +96,7 @@ def filtrar_peliculas():
     limpiar_pantalla()
 
     print("-----------------------------------------------------")
-    print("------- Filtro de películas -------------")
-    print()
+    print("------- Filtro de películas ------------- \n")
     print("Digite 1 para ver las peliculas según su genero")
     print("Digite 2 para ver las películas en un rango de precio")
     print("Digite 3 para ver las películas por año")
@@ -115,8 +113,9 @@ def filtrar_peliculas():
         opcion_submenu = input("Ingrese el precio máximo de alquiler (con un .): ")
         opcion_submenu = float(opcion_submenu)
         fil_pre(opcion_submenu)
-    #elif opcion_submenu == 3:
-
+    elif opcion_submenu == 4:
+        opcion_submenu = input("Ingrese el nombre de la pelicula que busca (o una parte): ")
+        fil_nombre(opcion_submenu)
 
 def fil_gen(inp):
     inp = inp.lower() #Convertimos cualquier cadena en minusculas
@@ -126,7 +125,7 @@ def fil_gen(inp):
         if (arr_pelis[i].genero == inp):
             arr_filtro.append(arr_pelis[i].nombre)
     else: print("Tenemos ", (len(arr_filtro)), " peliculas de ", inp.lower(), " disponibles :", arr_filtro)
-    arr_pelis.clear()
+    arr_filtro.clear()
     filtrar_peliculas()
 
 def fil_pre(p_max):
@@ -137,7 +136,18 @@ def fil_pre(p_max):
             arr_filtro.append(text_fil_pre)
     else:
         print("Tenemos ", (len(arr_filtro)), " peliculas de menor o igual precio de ", p_max, " disponibles :", arr_filtro)
-    arr_pelis.clear()
+    arr_filtro.clear()
     filtrar_peliculas()
 
+def fil_nombre(nom):
+    copy_arr = arr_pelis
+    nom = nom.lower()
+    for i in range(len(copy_arr)):
+        copy_arr[i].nombre = copy_arr[i].nombre.lower()
+        if (copy_arr[i].nombre.find(nom) >= 1 or copy_arr[i].nombre == nom):
+            arr_filtro.append(arr_pelis[i].nombre)
+    else:
+        print("Coinciden con la busqueda de \'", nom, "\' : ", arr_filtro)
+    arr_filtro.clear()
+    filtrar_peliculas()
 menu()
