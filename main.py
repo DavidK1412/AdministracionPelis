@@ -1,7 +1,9 @@
 # Importamos la librería OS para usar SYSTEM y poder limpiar pantalla
+from io import open_code
 import os
 import copy # Libreria para copiar
 import random
+import time
 
 class Pelicula:  # CLASE INICIALIZADORA DE PELICULAS, NOMBRE Y GENERO SON DATOS DE TIPO STRING, AÑO ES TIPO ENTERO Y PRECIO DE TIPO FLOTANTE
     def __init__(self, nombre, genero, anio, cantidad, precio):
@@ -42,8 +44,6 @@ pelicula20 = Pelicula("El tigre blanco", "Drama", 2021, 12, 20000)
 arr_pelis = [pelicula1, pelicula2, pelicula3,pelicula4,pelicula5,pelicula6,pelicula7,pelicual8,pelicual9,pelicula10,pelicula11,pelicula12,pelicula13,pelicula14,pelicula15,pelicula16,pelicula17, pelicula18,pelicula19,pelicula20]
 
 status = True
-peliculas_alquiladas = []
-valor_total_alquilado = []
 input_string = ""
 arr_filtro = []
 
@@ -72,75 +72,68 @@ def pelicula_aleatoria():
 
 #================== INICIO ALQUILAR PELÍCULA ===================================
 
-#---------------------- INICIO MENÚ ALQUILAR -----------------------------------
-def menu_alquilar():
-    limpiar_pantalla()
-    pelicula_aleatoria()
-    print()
-    print("-----------------------------------------------------")
-    print("------- Alquiler de películas ------------- \n")
-    print("Digite 1 para alquilar películas por listado")
-    print("Ingrese 0 para volver")
-    opcion = int(input("Por favor, digite una opción: "))
-
-    if opcion == 1:
-        peliculas_disponibles()
-        alquilar_pelicula()
-    elif opcion == 0:
-        menu()
-#---------------------- FIN MENÚ ALQUILAR --------------------------------------
-
 #--------------------- INICIO FUNCIÓN SELECCIONAR PELÍCULA ---------------------
+peliculas_alquiladas = []
 def alquilar_pelicula():
+    limpiar_pantalla()
+    print("{:^93}".format("Bienvenido al alquiler de películas"))
+    print("{}".format("-"*93))
+    print()
+    opcion_menu = int(input("¿cuántas películas desea alquilar?: "))
+    print("{}".format("-"*93))
+    print()
     peliculas_disponibles()
+    evitar_duplicado = 0
     i = 1
-    while i == 1 :
-        opcion = int(input("Seleccione una película: "))
+    while i <=opcion_menu :
+        seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i)))
+
+        #Ciclo para evitar que ingresen la misma película dos veces
+        while not evitar_duplicado != seleccionar_peli:
+            print()
+            print("La película seleccionada ya se encuentra agregada")
+            print()
+            seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i)))
+            
         for j in range(len(arr_pelis)):
-            arr_copy = arr_pelis
-            ind = arr_copy.index(arr_pelis[j])          
-            if opcion == ind + 1:
-                print()
-                print("La película que desea alquilar")
-                print("\t Titulo:", arr_pelis[j].nombre)
-                print("\t Genero:", arr_pelis[j].genero)
-                print("\t Valor:", arr_pelis[j].precio) 
-                print()
-                print("-----------------------------")
-                print()
-                valor_total_alquilado.append(arr_pelis[j].precio)
-                arr_pelis[j].cantidad -= 1
-        print("¿Desea alquilar otra película?")
-        print("Digite 1 para continuar")
-        print("Digite 0 para Terminar")
-        opcion = int(input("Ingrese una opción: "))
-
-        if opcion == 1:
-            i = 1
-        elif opcion == 0:
-            i = 0
-
-    suma = 0
-    for i in range(len(valor_total_alquilado)):
-        suma += valor_total_alquilado[i]
-
-    mostrar_total(suma)
+            indice_arreglo_peli = arr_pelis.index(arr_pelis[j])
+            if indice_arreglo_peli + 1 == seleccionar_peli:
+                print("{}".format("-"*93))
+                print("{:<3} Se agregó '{}' correctamente".format("", arr_pelis[j].nombre))
+                print("{}".format("-"*93))
+                #Agregamos las películas seleccionadas a la lista
+                peliculas_alquiladas.append(arr_pelis[j])
+        evitar_duplicado = seleccionar_peli
+        
+        i += 1
+    time.sleep(2)
+    mostrar_total_alquiler()
 #------------------ FIN FUNCIÓN SELECCIONAR PELÍCULA ---------------------------
 
 #------------------ INICIO FUNCIÓN MOSTRAR FACTURA -----------------------------
-def mostrar_total(total):
-    contar_pelis = 0
-    for i in range(len(valor_total_alquilado)):
-        contar_pelis += 1
-    print("============================")
-    print("          Factura       ")
-    print("---------------------------")
-    print(f"Películas alquiladas: {contar_pelis}")
-    print(f"Total a pagar: ${total}")
-    print("---------------------------")
-    opcion = int(input("Digite 0 para volver al menú principal: "))
+def mostrar_total_alquiler():
+    limpiar_pantalla()
+    sumar_precios = 0
+    print("{:^93}".format("Factura"))
+    print("{}".format(""*93))
+    print("Películas seleccionadas:")
+    print("{}".format("-"*93))
+    print()
+    for i in range(len(peliculas_alquiladas)):
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format("", peliculas_alquiladas[i].nombre, peliculas_alquiladas[i].genero, peliculas_alquiladas[i].anio, f"$ {peliculas_alquiladas[i].precio}"))
+        print()
+        sumar_precios += peliculas_alquiladas[i].precio
+    print("{}".format("-"*93))
+    print("{:>77} {:>14}".format("Total",f"$ {sumar_precios}"))
+    print("{}".format("-"*93))
+
+    print("Precione 0 para terminar")
+    print("Precione 1 para agregar más películas")
+    opcion = int(input("ingrese una opción: "))
     if opcion == 0:
-        menu()
+        print("Gracias por utilizar nuestro programa ¡Vuelva pronto!")
+    elif opcion==1:
+        alquilar_pelicula()
 #--------------- FIN FUNCIÓN MOSTRAR FACTURA -----------------------------------
 
 #======================= FIN ALQUILAR PELÍCULA =================================
@@ -311,7 +304,7 @@ def menu():
     elif opcion == 2:
         filtrar_peliculas()
     elif opcion == 3:
-        menu_alquilar()
+        alquilar_pelicula()
     elif opcion == 0:
         print("Gracias por utilizar nuestro sistema, ¡vuelva pronto!")
 #======================= FIN MENÚ PRINCIPAL ====================================
