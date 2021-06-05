@@ -264,20 +264,17 @@ def fil_nombre(nom):
 #============== INICIO PELÍCULAS DISPONIBLES ===========================
 def peliculas_disponibles():
     limpiar_pantalla()
-    peliculas_disponibles = []
-    copy_arr = copy.deepcopy(arr_pelis)
-    for j in range(len(copy_arr)):
-        if copy_arr[j].cantidad != 0:
-            peliculas_disponibles.append(arr_pelis)
-            
+  
+    #Creamos una tabla para mostrar las películas disponibles
+    print("{}".format("-"*93))
+    print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+    print("{}".format("="*93))
     print()
-    print(f"\t Total películas disponibles {len(peliculas_disponibles)}")
-    print("-------------------------------------------------------------------------------------------------------")
-    for j in range(len(peliculas_disponibles)):
-            print(f"\t {j+1}. Título:", arr_pelis[j].nombre, " Genero:", arr_pelis[j].genero, " Año:", arr_pelis[j].anio, " Valor:", "$", arr_pelis[j].precio)
-            print("-------------------------------------------------------------------------------------------------------")
+    for i in range(len(arr_pelis)):
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(i+1,arr_pelis[i].nombre, arr_pelis[i].genero, arr_pelis[i].anio, f"$ {arr_pelis[i].precio}" ))
+        print("{}".format("-"*93))
+
     pelicula_aleatoria()
-    del peliculas_disponibles
 # ==================== FIN PELÍCULAS DISPONIBLES =======================
 
 #==================== INICIO MENÚ PRINCIPAL ========================
