@@ -41,9 +41,6 @@ pelicula20 = Pelicula("El tigre blanco", "Drama", 2021, 12, 20000)
 ##OBJETOS DE LA PELICULA 5 ACCIÓN/SUPERHEROES, 5 TERROR, 5 NIÑOS/FICCION y 5 DRAMA/COMEDIA
 arr_pelis = [pelicula1, pelicula2, pelicula3,pelicula4,pelicula5,pelicula6,pelicula7,pelicual8,pelicual9,pelicula10,pelicula11,pelicula12,pelicula13,pelicula14,pelicula15,pelicula16,pelicula17, pelicula18,pelicula19,pelicula20]
 
-#Se genera un número aleatorio para dar una película aleatoria
-numero_aleatorio = random.randrange(len(arr_pelis))
-
 status = True
 peliculas_alquiladas = []
 valor_total_alquilado = []
@@ -60,17 +57,17 @@ def limpiar_pantalla():
 #==================== FIN LIMPIAR PANTALLA =====================================
 
 #==================== INICIO PELÍCULA RECOMENDADA ==============================
+#Se guarda en una variable una palícula aleatoria
+random_peli = random.choice(arr_pelis)
 def pelicula_aleatoria():
-    peliculas_ale = []
-    copy_arr = copy.deepcopy(arr_pelis)
-    for j in range(len(copy_arr)):
-        if copy_arr[j].cantidad != 0:
-            peliculas_ale.append(arr_pelis)
-
-    print("Película recomendada del día")
-    print("======================================")
-    print(f" \tTítulo:", arr_pelis[numero_aleatorio].nombre, "\n \tGenero:", arr_pelis[numero_aleatorio].genero, "\n \tAño:", arr_pelis[numero_aleatorio].anio, "\n \tValor:", "$", arr_pelis[numero_aleatorio].precio)
-    print()
+   for i in range(len(arr_pelis)):
+        if random_peli.nombre == arr_pelis[i].nombre:
+            print("{:^93}".format("Película Recomendada"))
+            print("{}".format("-"*93))
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+            print("{}".format("-"*93))
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(i+1,random_peli.nombre, random_peli.genero, random_peli.anio, f"$ {random_peli.precio}"))
+            print()
 #====================== FIN PELÍCULA RECOMENDADA ===============================
 
 #================== INICIO ALQUILAR PELÍCULA ===================================
