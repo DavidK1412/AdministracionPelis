@@ -70,7 +70,6 @@ def pelicula_aleatoria():
 
 
 #================== INICIO ALQUILAR PELÍCULA ===================================
-
 #--------------------- INICIO FUNCIÓN SELECCIONAR PELÍCULA ---------------------
 peliculas_alquiladas = []
 def alquilar_pelicula():
@@ -86,10 +85,17 @@ def alquilar_pelicula():
         #Ciclo para evitar que ingresen la misma película dos veces
         for h in range(len(peliculas_alquiladas)):
             while not peliculas_alquiladas[h].id != seleccionar_peli:
-                print()
-                print("La película seleccionada ya se encuentra agregada")
-                print()
-                seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i)))
+                if opcion_menu == 1:
+                    print()
+                    print("La película seleccionada ya se encuentra agregada")
+                    print()
+                    time.sleep(2)
+                    mostrar_total_alquiler()
+                else:
+                    print()
+                    print("La película seleccionada ya se encuentra agregada")
+                    print()
+                    seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i+1)))
             
         for j in range(len(arr_pelis)):
             #Validamos que el ID sea igual al que ingresó el usuario
@@ -115,8 +121,10 @@ def mostrar_total_alquiler():
     print("Películas seleccionadas:")
     print("{}".format("-"*93))
     print()
+    print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+    print("{}".format("-"*93))
     for i in range(len(peliculas_alquiladas)):
-        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format("", peliculas_alquiladas[i].nombre, peliculas_alquiladas[i].genero, peliculas_alquiladas[i].anio, f"$ {peliculas_alquiladas[i].precio}"))
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(peliculas_alquiladas[i].id, peliculas_alquiladas[i].nombre, peliculas_alquiladas[i].genero, peliculas_alquiladas[i].anio, f"$ {peliculas_alquiladas[i].precio}"))
         print()
         sumar_precios += peliculas_alquiladas[i].precio
     print("{}".format("-"*93))
