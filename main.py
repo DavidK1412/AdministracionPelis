@@ -161,16 +161,24 @@ def filtrar_peliculas():
     if opcion == 0:
         menu()
     elif opcion == 1:
-        input_string = input("Ingrese el genero que busca en nuestro catalogo: ")
+        limpiar_pantalla()
+        input_string = input("{:<2} {}".format("","Ingrese el género que busca en nuestro catalogo: "))
+        print("{}".format("-"*93))
         fil_gen(input_string)
     elif opcion == 2:
-        opcion = int(input("Ingrese el precio máximo de alquiler (sin .): "))
+        limpiar_pantalla()
+        opcion = int(input("{:<2} {}".format("","Ingrese el precio máximo de alquiler (sin .): ")))
+        print("{}".format("-"*93))
         fil_pre(opcion)
     elif opcion == 3:
-        opcion = int(input("Ingrese el año que desea consultar las peliculas: "))
+        limpiar_pantalla()
+        opcion = int(input("{:<2} {}".format("","Ingrese el año que desea consultar las peliculas: ")))
+        print("{}".format("-"*93))
         fil_anio(opcion)
     elif opcion == 4:
-        opcion_submenu = input("Ingrese el nombre de la pelicula que busca (o una parte): ")
+        limpiar_pantalla()
+        opcion_submenu = input("{:<2} {}".format("","Ingrese el nombre de la pelicula que busca (o una parte): "))
+        print("{}".format("-"*93))
         fil_nombre(opcion_submenu)
 #----------------------- FIN FUNCIÓN FILTRAR PELÍCULAS -------------------------
 
@@ -182,16 +190,19 @@ def fil_gen(inp):
 
     for i in range(len(arr_pelis)):
         if (arr_pelis[i].genero == inp):
-            arr_filtro.append(arr_pelis[i].nombre)
+            arr_filtro.append(arr_pelis[i])
     else:
+        print()
+        print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con: '{inp}'"))
         print("{}".format("-"*93))
-        print(f"Coinciden {len(arr_filtro)} películas con: '{inp}'")
+        print()
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
         print("{}".format("-"*93))
         print()
         for j in range(len(arr_filtro)):
-            print("{:<5} {}".format("",f"{j+1}. {arr_filtro[j]}"))
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+            print("{}".format("-"*93))
         print()
-        print("{}".format("-"*93))
 
     del arr_filtro
     opcion_submenu = int(input("Digite 0 para volver: "))
@@ -201,18 +212,20 @@ def fil_gen(inp):
 #----------------- INICIO FUNCIÓN FILTRADO POR PRECIO --------------------------
 def fil_pre(p_max):
     arr_filtro = []
-    text_fil_pre = ""
     for i in range(len(arr_pelis)):
         if (arr_pelis[i].precio <= p_max):
-            text_fil_pre = arr_pelis[i].nombre + " con el precio de: $" + str(arr_pelis[i].precio)
-            arr_filtro.append(text_fil_pre)
+            arr_filtro.append(arr_pelis[i])
     else:
         print()
-        print("Coinciden", len(arr_filtro)," películas con precio menor o igual a:", p_max)
-        print("---------------------------------------------------")
+        print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con precio menor o igual a: $ {p_max}"))
+        print()
+        print("{}".format("-"*93))
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+        print("{}".format("-"*93))
         print()
         for j in range(len(arr_filtro)):
-            print(f"\t {j + 1}.", arr_filtro[j])
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+            print("{}".format("-"*93))
         print()
 
     del arr_filtro
@@ -222,19 +235,21 @@ def fil_pre(p_max):
 
 #------------------- INICIO FUNCIÓN FILTRADO POR AÑO ---------------------------
 def fil_anio(anio):
-    text_fil_an = ""
     arr_filtro = []
     for i in range(len(arr_pelis)):
         if (arr_pelis[i].anio == anio):
-            text_fil_an = arr_pelis[i].nombre + " del año: " + str(arr_pelis[i].anio)
-            arr_filtro.append(text_fil_an)
+            arr_filtro.append(arr_pelis[i])
     else: 
         print()
-        print("Coinciden", len(arr_filtro), "películas con:", anio)
-        print("----------------------------------------------")
+        print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con precio menor o igual a: $ {anio}"))
+        print("{}".format("-"*93))
+        print()
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+        print("{}".format("-"*93))
         print()
         for j in range(len(arr_filtro)):
-            print(f"\t{j + 1}", arr_filtro[j])
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+            print("{}".format("-"*93))
         print()
 
     del arr_filtro
@@ -250,14 +265,18 @@ def fil_nombre(nom):
     for i in range(len(copy_arr)):
         copy_arr[i].nombre = copy_arr[i].nombre.lower()
         if (copy_arr[i].nombre.find(nom) >= 0 or copy_arr[i].nombre == nom):
-            arr_filtro.append(arr_pelis[i].nombre)
+            arr_filtro.append(arr_pelis[i])
     else:
         print()
-        print("Coinciden", len(arr_filtro), "películas con:", "'" + nom + "'" )
-        print("------------------------------------")
+        print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con: '{nom}'"))
+        print("{}".format("-"*93))
+        print()
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+        print("{}".format("-"*93))
         print()
         for j in range (len(arr_filtro)):
-            print(f"\t {j + 1}." , arr_filtro[j])
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+            print("{}".format("-"*93))
         print()
 
     del arr_filtro
