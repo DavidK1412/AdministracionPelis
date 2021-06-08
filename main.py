@@ -1,6 +1,5 @@
-# Importamos la librería OS para usar SYSTEM y poder limpiar pantalla
 from io import open_code
-import os
+import os # Importamos la librería OS para usar SYSTEM y poder limpiar pantalla
 import copy # Libreria para copiar
 import random
 import time
@@ -131,7 +130,7 @@ def mostrar_total_alquiler():
     opcion = int(input("ingrese una opción: "))
 
     #Verificamos que el dato sea correcto
-    while not opcion == 0 or opcion == 1:
+    while not (opcion == 0 or opcion == 1):
         print()
         print("Por favor, ingrese un valor válido")
         opcion = int(input("ingrese una opción: "))
@@ -172,7 +171,7 @@ def filtrar_peliculas():
         fil_anio(opcion)
     elif opcion == 4:
         opcion_submenu = input("Ingrese el nombre de la pelicula que busca (o una parte): ")
-        fil_nombre(opcion)
+        fil_nombre(opcion_submenu)
 #----------------------- FIN FUNCIÓN FILTRAR PELÍCULAS -------------------------
 
 #---------------------- INICIO FUNCIÓN FILTRADO POR GÉNERO ---------------------
@@ -185,13 +184,14 @@ def fil_gen(inp):
         if (arr_pelis[i].genero == inp):
             arr_filtro.append(arr_pelis[i].nombre)
     else:
-        print()
-        print("Coinciden", len(arr_filtro), "películas con:", "'"+inp+"'")
-        print("-------------------------------------------------------")
+        print("{}".format("-"*93))
+        print(f"Coinciden {len(arr_filtro)} películas con: '{inp}'")
+        print("{}".format("-"*93))
         print()
         for j in range(len(arr_filtro)):
-            print(f"\t {j + 1}", arr_filtro[j])
+            print("{:<5} {}".format("",f"{j+1}. {arr_filtro[j]}"))
         print()
+        print("{}".format("-"*93))
 
     del arr_filtro
     opcion_submenu = int(input("Digite 0 para volver: "))
