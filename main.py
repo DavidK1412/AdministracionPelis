@@ -6,7 +6,8 @@ import random
 import time
 
 class Pelicula:  # CLASE INICIALIZADORA DE PELICULAS, NOMBRE Y GENERO SON DATOS DE TIPO STRING, AÑO ES TIPO ENTERO Y PRECIO DE TIPO FLOTANTE
-    def __init__(self, nombre, genero, anio, precio):
+    def __init__(self, id, nombre, genero, anio, precio):
+        self.id = id
         self.nombre = nombre
         self.genero = genero
         self.anio = anio
@@ -16,26 +17,26 @@ class Pelicula:  # CLASE INICIALIZADORA DE PELICULAS, NOMBRE Y GENERO SON DATOS 
 cantidad_peliculas_vista_user = 20 # Será para mostrarle al usuario, podemos usar el método len() para obtener los indices de la lista arr_pelis
 
 # Añadimos las películas
-pelicula1 = Pelicula("Spiderman", "Superheroes", 2002, 10000)  # Eliminados los puntos al final de cada titulo/genero, facilitará el manejo de los Strings
-pelicula2 = Pelicula("Venom: Let There Be Carnage", "Superheroes", 2021, 20000)
-pelicula3 = Pelicula("Rapidos y Furiosos 4", "Acción", 2009, 12000)
-pelicula4 = Pelicula("La caida del Halcón negro", "Acción", 2001, 13000)
-pelicula5 = Pelicula("Sherlock Holmes", "Aventura", 2009, 15000)
-pelicula6 = Pelicula("Divergente", "Acción", 2014, 14000)
-pelicula7 = Pelicula("Wonder Woman", "Acción", 2020, 18000)
-pelicual8 = Pelicula("Coco", "Infantil", 2017, 15000)
-pelicual9 = Pelicula("Soul", "Infantil", 2020, 16000)
-pelicula10 = Pelicula("El libro de la vida", "Infantil",  2014, 12000)
-pelicula11 = Pelicula("El Conjuro 3: el diablo me obligó a hacerlo", "Terror", 2021, 20000)
-pelicula12 = Pelicula("REC", "Terror", 2007, 11000)
-pelicula13 = Pelicula("¿Y dónde están las rubias?", "Comedia", 2004, 10000)
-pelicula14 = Pelicula("Supercool", "Comedia", 2007, 10000)
-pelicula15 = Pelicula("No se metan con Zohan", "Comedia", 2008, 12000)
-pelicula16 = Pelicula("Indiana Jones y la última cruzada", "Aventura", 1989, 10000)
-pelicula17 = Pelicula("Jumanji: En la selva", "Aventura", 2017, 16000)
-pelicula18 = Pelicula("El gran Gatsby", "Drama", 2013, 13000)
-pelicula19 = Pelicula("Perfume: La historia de un asesino","Drama", 2006, 11000)
-pelicula20 = Pelicula("El tigre blanco", "Drama", 2021, 20000)
+pelicula1 = Pelicula(1, "Spiderman", "Superheroes", 2002, 10000)  # Eliminados los puntos al final de cada titulo/genero, facilitará el manejo de los Strings
+pelicula2 = Pelicula(2, "Venom: Let There Be Carnage", "Superheroes", 2021, 20000)
+pelicula3 = Pelicula(3, "Rapidos y Furiosos 4", "Acción", 2009, 12000)
+pelicula4 = Pelicula(4, "La caida del Halcón negro", "Acción", 2001, 13000)
+pelicula5 = Pelicula(5, "Sherlock Holmes", "Aventura", 2009, 15000)
+pelicula6 = Pelicula(6, "Divergente", "Acción", 2014, 14000)
+pelicula7 = Pelicula(7, "Wonder Woman", "Acción", 2020, 18000)
+pelicual8 = Pelicula(8, "Coco", "Infantil", 2017, 15000)
+pelicual9 = Pelicula(9, "Soul", "Infantil", 2020, 16000)
+pelicula10 = Pelicula(10, "El libro de la vida", "Infantil",  2014, 12000)
+pelicula11 = Pelicula(11, "El Conjuro 3: el diablo me obligó a hacerlo", "Terror", 2021, 20000)
+pelicula12 = Pelicula(12, "REC", "Terror", 2007, 11000)
+pelicula13 = Pelicula(13, "¿Y dónde están las rubias?", "Comedia", 2004, 10000)
+pelicula14 = Pelicula(14, "Supercool", "Comedia", 2007, 10000)
+pelicula15 = Pelicula(15, "No se metan con Zohan", "Comedia", 2008, 12000)
+pelicula16 = Pelicula(16, "Indiana Jones y la última cruzada", "Aventura", 1989, 10000)
+pelicula17 = Pelicula(17, "Jumanji: En la selva", "Aventura", 2017, 16000)
+pelicula18 = Pelicula(18, "El gran Gatsby", "Drama", 2013, 13000)
+pelicula19 = Pelicula(19, "Perfume: La historia de un asesino","Drama", 2006, 11000)
+pelicula20 = Pelicula(20, "El tigre blanco", "Drama", 2021, 20000)
 
 
 #Arreglo para guardar las películas
@@ -59,14 +60,12 @@ def limpiar_pantalla():
 #Se guarda en una variable una palícula aleatoria
 random_peli = random.choice(arr_pelis)
 def pelicula_aleatoria():
-   for i in range(len(arr_pelis)):
-        if random_peli.nombre == arr_pelis[i].nombre:
-            print("{:^93}".format("Película Recomendada"))
-            print("{}".format("-"*93))
-            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
-            print("{}".format("-"*93))
-            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(i+1,random_peli.nombre, random_peli.genero, random_peli.anio, f"$ {random_peli.precio}"))
-            print()
+        print("{:^93}".format("Película Recomendada"))
+        print("{}".format("-"*93))
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+        print("{}".format("-"*93))
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(random_peli.id,random_peli.nombre, random_peli.genero, random_peli.anio, f"$ {random_peli.precio}"))
+        print()
 #====================== FIN PELÍCULA RECOMENDADA ===============================
 
 #================== INICIO ALQUILAR PELÍCULA ===================================
