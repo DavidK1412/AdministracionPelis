@@ -188,7 +188,6 @@ def filtrar_peliculas():
         print("{}".format("-"*93))
         fil_nombre(opcion_submenu)
 #----------------------- FIN FUNCIÓN FILTRAR PELÍCULAS -------------------------
-
 #---------------------- INICIO FUNCIÓN FILTRADO POR GÉNERO ---------------------
 def fil_gen(inp):
     arr_filtro = []
@@ -212,10 +211,20 @@ def fil_gen(inp):
         print()
 
     del arr_filtro
-    opcion_submenu = int(input("Digite 0 para volver: "))
-    if opcion_submenu == 0: filtrar_peliculas()
-#------------------ FIN FUNCIÓN FILTRADO POR GÉNERO ----------------------------
+    #Opciones para poder alquilar una película o para volver al menú
+    print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
+    print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
+    opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
+    #Validamos que los datos ingresados sean correctos
+    while not (opcion_submenu == 0 or opcion_submenu == 1):
+        opcion_submenu = int(input("{:<2} {}".format("","Por favor, ingrese una opción válida: ")))
+
+    if opcion_submenu == 0: 
+        filtrar_peliculas()
+    elif opcion_submenu == 1:
+        alquilar_pelicula()
+#------------------ FIN FUNCIÓN FILTRADO POR GÉNERO ----------------------------
 #----------------- INICIO FUNCIÓN FILTRADO POR PRECIO --------------------------
 def fil_pre(p_max):
     arr_filtro = []
@@ -236,10 +245,20 @@ def fil_pre(p_max):
         print()
 
     del arr_filtro
-    opcion_submenu = int(input("Digite 0 para volver: "))
-    if opcion_submenu == 0: filtrar_peliculas()
-#------------------ FIN FUNCIÓN FILTRADO POR PRECIO ----------------------------
+    #Opciones para poder alquilar una película o para volver al menú
+    print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
+    print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
+    opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
+    #Validamos que los datos ingresados sean correctos
+    while not (opcion_submenu == 0 or opcion_submenu == 1):
+        opcion_submenu = int(input("{:<2} {}".format("","Por favor, ingrese una opción válida: ")))
+
+    if opcion_submenu == 0: 
+        filtrar_peliculas()
+    elif opcion_submenu == 1:
+        alquilar_pelicula()
+#------------------ FIN FUNCIÓN FILTRADO POR PRECIO ----------------------------
 #------------------- INICIO FUNCIÓN FILTRADO POR AÑO ---------------------------
 def fil_anio(anio):
     arr_filtro = []
@@ -260,10 +279,20 @@ def fil_anio(anio):
         print()
 
     del arr_filtro
-    opcion_submenu = int(input("Digite 0 para volver: "))
-    if opcion_submenu == 0: filtrar_peliculas()
-#-------------------------- FIN FUNCIÓN FILTRADO POR AÑO -----------------------
+    #Opciones para poder alquilar una película o para volver al menú
+    print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
+    print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
+    opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
+    #Validamos que los datos ingresados sean correctos
+    while not (opcion_submenu == 0 or opcion_submenu == 1):
+        opcion_submenu = int(input("{:<2} {}".format("","Por favor, ingrese una opción válida: ")))
+
+    if opcion_submenu == 0: 
+        filtrar_peliculas()
+    elif opcion_submenu == 1:
+        alquilar_pelicula()
+#-------------------------- FIN FUNCIÓN FILTRADO POR AÑO -----------------------
 #------------------------ INICIO FUNCIÓN FILTRADO POR NOMBRE -------------------   
 def fil_nombre(nom):
     arr_filtro = []
@@ -287,11 +316,22 @@ def fil_nombre(nom):
         print()
 
     del arr_filtro
-    opcion_submenu = int(input("Digite 0 para volver: "))
-    if opcion_submenu == 0: filtrar_peliculas()
-#------------------------ FIN FUNCIÓN FILTRADO POR NOMBRE ----------------------
+    #Opciones para poder alquilar una película o para volver al menú
+    print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
+    print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
+    opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
+    #Validamos que los datos ingresados sean correctos
+    while not (opcion_submenu == 0 or opcion_submenu == 1):
+        opcion_submenu = int(input("{:<2} {}".format("","Por favor, ingrese una opción válida: ")))
+
+    if opcion_submenu == 0: 
+        filtrar_peliculas()
+    elif opcion_submenu == 1:
+        alquilar_pelicula()
+#------------------------ FIN FUNCIÓN FILTRADO POR NOMBRE ----------------------
 #========================= FIN FILTRADO DE PELÍCULAS ===========================
+
 
 #============== INICIO PELÍCULAS DISPONIBLES ===========================
 def peliculas_disponibles():
@@ -337,7 +377,7 @@ def menu():
         print("{:<2} {}".format("", "Digite 0 para volver"))
         opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
-        #Validamos que datos ingresado sea correcto
+        #Validamos que los datos ingresados sean correcto
         while not (opcion_submenu == 0 or opcion_submenu == 1):
             opcion_submenu = int(input("{:<2} {}".format("","Por favor, ingrese una opción válida: ")))
 
@@ -350,7 +390,7 @@ def menu():
     #Opción 2 para realizar el alquiler de películas
     elif opcion == 2:
         filtrar_peliculas()
-    #Opción 0 para volver al menú
+    #Opción 0 para salir del programa
     elif opcion == 0: 
         print("\n {:<10} {}".format("", "Gracias por utilizar nuestro sistema, ¡vuelva pronto!"))
 #======================= FIN MENÚ PRINCIPAL ====================================
