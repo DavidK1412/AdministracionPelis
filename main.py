@@ -109,7 +109,6 @@ def alquilar_pelicula():
     time.sleep(2)
     mostrar_total_alquiler()
 #------------------ FIN FUNCIÓN SELECCIONAR PELÍCULA ---------------------------
-
 #------------------ INICIO FUNCIÓN MOSTRAR FACTURA -----------------------------
 def mostrar_total_alquiler():
     limpiar_pantalla()
@@ -142,11 +141,10 @@ def mostrar_total_alquiler():
     elif opcion==1:
         alquilar_pelicula()
 #--------------- FIN FUNCIÓN MOSTRAR FACTURA -----------------------------------
-
 #======================= FIN ALQUILAR PELÍCULA =================================
 
-#===================== INICIO FILTRADO DE PELÍCULAS ============================
 
+#===================== INICIO FILTRADO DE PELÍCULAS ============================
 #--------------------- INICO FUNCIÓN FILTRAR PELÍCULAS -------------------------
 def filtrar_peliculas():
     # Llamada a la función de limpiar pantalla
@@ -165,28 +163,49 @@ def filtrar_peliculas():
     while not (opcion == 1 or opcion == 2 or opcion == 3 or opcion == 4 or opcion == 5 or opcion == 0):
         opcion = int(input("\n {:<10} {}".format("","Por favor, ingrese una opción válida: ")))
 
+    #Opción para ir al menú
     if opcion == 0:
         menu()
+    #Opción para ir al filtrado por género
     elif opcion == 1:
         limpiar_pantalla()
         input_string = input("{:<2} {}".format("","Ingrese el género que busca en nuestro catalogo: "))
         print("{}".format("-"*93))
         fil_gen(input_string)
+    #Opción para ir al filtrado por precio
     elif opcion == 2:
         limpiar_pantalla()
         opcion = int(input("{:<2} {}".format("","Ingrese el precio máximo de alquiler (sin .): ")))
         print("{}".format("-"*93))
         fil_pre(opcion)
+    #Opción para ir al filtrado por año
     elif opcion == 3:
         limpiar_pantalla()
         opcion = int(input("{:<2} {}".format("","Ingrese el año que desea consultar las peliculas: ")))
         print("{}".format("-"*93))
         fil_anio(opcion)
+    #Opción para ir al filtrado por nombre
     elif opcion == 4:
         limpiar_pantalla()
         opcion_submenu = input("{:<2} {}".format("","Ingrese el nombre de la pelicula que busca (o una parte): "))
         print("{}".format("-"*93))
         fil_nombre(opcion_submenu)
+    #Opción para mostrar todo el catálogo
+    elif opcion == 5:
+        peliculas_disponibles()
+        print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
+        print("{:<2} {}".format("", "Digite 0 para volver"))
+        opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
+
+        #Validamos que los datos ingresados sean correctos
+        while not (opcion_submenu == 0 or opcion_submenu == 1):
+            opcion_submenu = int(input("{:<2} {}".format("","Por favor, ingrese una opción válida: ")))
+
+        if opcion_submenu == 1:
+            alquilar_pelicula()
+        elif opcion_submenu ==0:
+            filtrar_peliculas()
+
 #----------------------- FIN FUNCIÓN FILTRAR PELÍCULAS -------------------------
 #---------------------- INICIO FUNCIÓN FILTRADO POR GÉNERO ---------------------
 def fil_gen(inp):
