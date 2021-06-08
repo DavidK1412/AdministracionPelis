@@ -149,14 +149,19 @@ def mostrar_total_alquiler():
 def filtrar_peliculas():
     # Llamada a la función de limpiar pantalla
     limpiar_pantalla()
-    print("-----------------------------------------------------")
-    print("------- Filtro de películas ------------- \n")
-    print("Digite 1 para ver las peliculas según su genero")
-    print("Digite 2 para ver las películas en un rango de precio")
-    print("Digite 3 para ver las películas por año")
-    print("Digite 4 para ver las peliculas por nombre")
-    print("Ingrese 0 para volver")
-    opcion = int(input("Por favor, digite una opción: "))
+    print("{}".format("-"*93))
+    print("{:^93}".format("Bienvenido al alquiler de películas"))
+    print("{}\n".format("-"*93))
+    print("{:<10} {}".format("","Digite 1 para buscar según su género"))
+    print("{:<10} {}".format("","Digite 2 para buscar según su rango de precio"))
+    print("{:<10} {}".format("","Digite 3 para buscar según su fecha de estreno"))
+    print("{:<10} {}".format("","Digite 4 para buscar por el nombre"))
+    print("{:<10} {}".format("","Digite 0 para volver"))
+    opcion = int(input("{:<10} {}".format("","Por favor, digite una opción: ")))
+
+    #validamos que la opción ingresada sea correcta
+    while not (opcion == 1 or opcion == 2 or opcion == 3 or opcion == 4 or opcion == 5 or opcion == 0):
+        opcion = int(input("\n {:<10} {}".format("","Por favor, ingrese una opción válida: ")))
 
     if opcion == 0:
         menu()
