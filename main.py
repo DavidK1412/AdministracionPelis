@@ -74,35 +74,32 @@ def pelicula_aleatoria():
 #--------------------- INICIO FUNCIÓN SELECCIONAR PELÍCULA ---------------------
 peliculas_alquiladas = []
 def alquilar_pelicula():
-    limpiar_pantalla()
-    print("{:^93}".format("Bienvenido al alquiler de películas"))
-    print("{}".format("-"*93))
     print()
     opcion_menu = int(input("¿cuántas películas desea alquilar?: "))
     print("{}".format("-"*93))
     print()
-    peliculas_disponibles()
-    evitar_duplicado = 0
-    i = 1
-    while i <=opcion_menu :
-        seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i)))
+    
+    i = 0
+    while i < opcion_menu :
+        seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i+1)))
 
         #Ciclo para evitar que ingresen la misma película dos veces
-        while not evitar_duplicado != seleccionar_peli:
-            print()
-            print("La película seleccionada ya se encuentra agregada")
-            print()
-            seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i)))
+        for h in range(len(peliculas_alquiladas)):
+            while not peliculas_alquiladas[h].id != seleccionar_peli:
+                print()
+                print("La película seleccionada ya se encuentra agregada")
+                print()
+                seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i)))
             
         for j in range(len(arr_pelis)):
-            indice_arreglo_peli = arr_pelis.index(arr_pelis[j])
-            if indice_arreglo_peli + 1 == seleccionar_peli:
+            #Validamos que el ID sea igual al que ingresó el usuario
+            if arr_pelis[j].id == seleccionar_peli:
+                #Mostamos por pantalla la película seleccionada
                 print("{}".format("-"*93))
                 print("{:<3} Se agregó '{}' correctamente".format("", arr_pelis[j].nombre))
                 print("{}".format("-"*93))
                 #Agregamos las películas seleccionadas a la lista
                 peliculas_alquiladas.append(arr_pelis[j])
-        evitar_duplicado = seleccionar_peli
         
         i += 1
     #Función para que la pantalla se mantenga un tiempo antes de cambiar a la factura
@@ -126,20 +123,21 @@ def mostrar_total_alquiler():
     print("{:>77} {:>14}".format("Total",f"$ {sumar_precios}"))
     print("{}".format("-"*93))
 
-    print("Precione 0 para terminar")
-    print("Precione 1 para agregar más películas")
-    opcion = int(input("ingrese una opción: "))
+    print("{:<2} {}".format("", "Digite 1 para agregar otra película"))
+    print("{:<2} {}".format("", "Digite 0 para salir"))
+    opcion = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
     #Verificamos que el dato sea correcto
     while not (opcion == 0 or opcion == 1):
-        print()
-        print("Por favor, ingrese un valor válido")
-        opcion = int(input("ingrese una opción: "))
+        opcion = int(input("{:<2} {}".format("", "Por favor, ingrese un valor válido: ")))
 
-    if opcion == 0:
-        print("Gracias por utilizar nuestro programa ¡Vuelva pronto!")
-    elif opcion==1:
-        alquilar_pelicula()
+    if opcion == 1:
+        filtrar_peliculas()
+    elif opcion == 0:
+        print()
+        print("{:<2} {}".format("", "Gracias por utilizar nuestro sistema, ¡vuelva pronto!"))
+        time.sleep(2)
+        menu()
 #--------------- FIN FUNCIÓN MOSTRAR FACTURA -----------------------------------
 #======================= FIN ALQUILAR PELÍCULA =================================
 
@@ -229,7 +227,7 @@ def fil_gen(inp):
             print("{}".format("-"*93))
         print()
 
-    del arr_filtro
+    
     #Opciones para poder alquilar una película o para volver al menú
     print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
     print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
@@ -243,6 +241,7 @@ def fil_gen(inp):
         filtrar_peliculas()
     elif opcion_submenu == 1:
         alquilar_pelicula()
+    del arr_filtro
 #------------------ FIN FUNCIÓN FILTRADO POR GÉNERO ----------------------------
 #----------------- INICIO FUNCIÓN FILTRADO POR PRECIO --------------------------
 def fil_pre(p_max):
