@@ -55,6 +55,7 @@ def limpiar_pantalla():
     os.system(var)
 #==================== FIN LIMPIAR PANTALLA =====================================
 
+
 #==================== INICIO PELÍCULA RECOMENDADA ==============================
 #Se guarda en una variable una palícula aleatoria
 random_peli = random.choice(arr_pelis)
@@ -66,6 +67,7 @@ def pelicula_aleatoria():
         print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(random_peli.id,random_peli.nombre, random_peli.genero, random_peli.anio, f"$ {random_peli.precio}"))
         print()
 #====================== FIN PELÍCULA RECOMENDADA ===============================
+
 
 #================== INICIO ALQUILAR PELÍCULA ===================================
 
@@ -309,6 +311,7 @@ def peliculas_disponibles():
     pelicula_aleatoria()
 # ==================== FIN PELÍCULAS DISPONIBLES =======================
 
+
 #==================== INICIO MENÚ PRINCIPAL ========================
 def menu():
     limpiar_pantalla()
@@ -326,22 +329,30 @@ def menu():
         print()
         opcion = int(input("{:<10} {}".format("","Por favor, ingrese una opción válida: ")))
 
-    #Condición para mostrar el listado de películas
+    #Opción 1 para mostrar el listado de películas
     if opcion == 1:
         peliculas_disponibles()
-        print("Digite 1 si desea alquilar películas")
-        print("Digite 0 si desea volver")
-        opcion2 = int(input("Digite una opción: "))
-        if opcion2 == 1:
+
+        print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
+        print("{:<2} {}".format("", "Digite 0 para volver"))
+        opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
+
+        #Validamos que datos ingresado sea correcto
+        while not (opcion_submenu == 0 or opcion_submenu == 1):
+            opcion_submenu = int(input("{:<2} {}".format("","Por favor, ingrese una opción válida: ")))
+
+        #Opción 1 submenú para alquilar películas
+        if opcion_submenu == 1:
             alquilar_pelicula()
-        elif opcion2 ==0:
+        #Opción 0 submenú para volver al menú
+        elif opcion_submenu ==0:
             menu()
+    #Opción 2 para realizar el alquiler de películas
     elif opcion == 2:
         filtrar_peliculas()
-    elif opcion == 3:
-        alquilar_pelicula()
-    elif opcion == 0:
-        print("Gracias por utilizar nuestro sistema, ¡vuelva pronto!")
+    #Opción 0 para volver al menú
+    elif opcion == 0: 
+        print("\n {:<10} {}".format("", "Gracias por utilizar nuestro sistema, ¡vuelva pronto!"))
 #======================= FIN MENÚ PRINCIPAL ====================================
 
 menu()
