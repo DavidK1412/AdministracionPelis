@@ -273,11 +273,13 @@ def peliculas_disponibles():
   
     #Creamos una tabla para mostrar las películas disponibles
     print("{}".format("-"*93))
+    print("{:^93}".format("Catálogo de películas"))
+    print("{}".format("="*93))
     print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
     print("{}".format("="*93))
     print()
     for i in range(len(arr_pelis)):
-        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(i+1,arr_pelis[i].nombre, arr_pelis[i].genero, arr_pelis[i].anio, f"$ {arr_pelis[i].precio}" ))
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_pelis[i].id,arr_pelis[i].nombre, arr_pelis[i].genero, arr_pelis[i].anio, f"$ {arr_pelis[i].precio}" ))
         print("{}".format("-"*93))
 
     pelicula_aleatoria()
@@ -286,13 +288,19 @@ def peliculas_disponibles():
 #==================== INICIO MENÚ PRINCIPAL ========================
 def menu():
     limpiar_pantalla()
-    print("-----------------------------------------------------")
-    print("------- Menú Principal -------------\n")
-    print("Digite 1 para ver todas las películas disponibles")
-    print("Digite 2 para filtrar las películas disponibles")
-    print("Digite 3 para alquilar una película")
-    print("Digite 0 para salir")
-    opcion = int(input("Digite una opción: "))
+    print("{}".format("-"*93))
+    print("{:^93}".format("Bienvenidos a tienda de película"))
+    print("{}".format("-"*93))
+    print()
+    print("{:<10} {}".format("", "Digite 1 si desea conocer nuestro catálogo"))
+    print("{:<10} {}".format("", "Digite 2 si desea alquilar alguna película"))
+    print("{:<10} {}".format("", "Digite 0 si desea salir"))
+    opcion = int(input("{:<10} {}".format("","Digite una opción: ")))
+
+    #Validamos que el dato ingresado sea el correcto
+    while not (opcion == 1 or opcion == 2 or opcion == 0):
+        print()
+        opcion = int(input("{:<10} {}".format("","Por favor, ingrese una opción válida: ")))
 
     #Condición para mostrar el listado de películas
     if opcion == 1:
