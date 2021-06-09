@@ -162,6 +162,7 @@ def filtrar_peliculas():
     print("{:<10} {}".format("","Digite 2 para buscar según su rango de precio"))
     print("{:<10} {}".format("","Digite 3 para buscar según su fecha de estreno"))
     print("{:<10} {}".format("","Digite 4 para buscar por el nombre"))
+    print("{:<10} {}".format("","Digite 5 para ver el catálogo"))
     print("{:<10} {}".format("","Digite 0 para volver"))
     opcion = int(input("{:<10} {}".format("","Por favor, digite una opción: ")))
 
