@@ -106,6 +106,12 @@ def alquilar_pelicula():
                 print("{}".format("-"*93))
                 #Agregamos las películas seleccionadas a la lista
                 peliculas_alquiladas.append(arr_pelis[j])
+
+        if seleccionar_peli > 20: # VERIFICACIÓN SI LA PELICULA EXISTE DENTRO DEL RANGO DE ID's
+            print()
+            print(f"No tenemos una pelicula identificada bajo el ID: {seleccionar_peli}")
+            print()
+            seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i + 1)))
         
         i += 1
     #Función para que la pantalla se mantenga un tiempo antes de cambiar a la factura
@@ -223,18 +229,25 @@ def fil_gen(inp):
         if (arr_pelis[i].genero == inp):
             arr_filtro.append(arr_pelis[i])
     else:
-        print()
-        print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con: '{inp}'"))
-        print("{}".format("-"*93))
-        print()
-        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
-        print("{}".format("-"*93))
-        print()
-        for j in range(len(arr_filtro)):
-            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+        if arr_filtro:
+            print()
+            print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con: '{inp}'"))
             print("{}".format("-"*93))
-        print()
-
+            print()
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+            print("{}".format("-"*93))
+            print()
+            for j in range(len(arr_filtro)):
+                print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+                print("{}".format("-"*93))
+            print()
+        else:
+            print("{:<2} {}".format("", f"No hay peliculas bajo el género: '{inp}'"))
+            time.sleep(2)
+            limpiar_pantalla()
+            input_string = input("{:<2} {}".format("", "Ingrese el género que busca en nuestro catalogo: "))
+            print("{}".format("-" * 93))
+            fil_gen(input_string)
     
     #Opciones para poder alquilar una película o para volver al menú
     print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
@@ -258,17 +271,25 @@ def fil_pre(p_max):
         if (arr_pelis[i].precio <= p_max):
             arr_filtro.append(arr_pelis[i])
     else:
-        print()
-        print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con precio menor o igual a: $ {p_max}"))
-        print()
-        print("{}".format("-"*93))
-        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
-        print("{}".format("-"*93))
-        print()
-        for j in range(len(arr_filtro)):
-            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+        if arr_filtro:
+            print()
+            print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con precio menor o igual a: $ {p_max}"))
+            print()
             print("{}".format("-"*93))
-        print()
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+            print("{}".format("-"*93))
+            print()
+            for j in range(len(arr_filtro)):
+                print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+                print("{}".format("-"*93))
+            print()
+        else:
+            print("{:<2} {}".format("", f"No hay peliculas bajo el precio: '{p_max}'"))
+            time.sleep(2)
+            limpiar_pantalla()
+            opcion = int(input("{:<2} {}".format("", "Ingrese el precio máximo de alquiler (sin .): ")))
+            print("{}".format("-" * 93))
+            fil_pre(opcion)
 
     del arr_filtro
     #Opciones para poder alquilar una película o para volver al menú
@@ -291,18 +312,26 @@ def fil_anio(anio):
     for i in range(len(arr_pelis)):
         if (arr_pelis[i].anio == anio):
             arr_filtro.append(arr_pelis[i])
-    else: 
-        print()
-        print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con precio menor o igual a: $ {anio}"))
-        print("{}".format("-"*93))
-        print()
-        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
-        print("{}".format("-"*93))
-        print()
-        for j in range(len(arr_filtro)):
-            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+    else:
+        if arr_filtro:
+            print()
+            print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con precio menor o igual a: $ {anio}"))
             print("{}".format("-"*93))
-        print()
+            print()
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+            print("{}".format("-"*93))
+            print()
+            for j in range(len(arr_filtro)):
+                print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+                print("{}".format("-"*93))
+            print()
+        else:
+            print("{:<2} {}".format("", f"En nuestro catalogo no hay peliculas bajo estrenadas en el año : '{anio}'"))
+            time.sleep(2)
+            limpiar_pantalla()
+            opcion = int(input("{:<2} {}".format("", "Ingrese el año que desea consultar las peliculas: ")))
+            print("{}".format("-" * 93))
+            fil_anio(opcion)
 
     del arr_filtro
     #Opciones para poder alquilar una película o para volver al menú
@@ -329,17 +358,26 @@ def fil_nombre(nom):
         if (copy_arr[i].nombre.find(nom) >= 0 or copy_arr[i].nombre == nom):
             arr_filtro.append(arr_pelis[i])
     else:
-        print()
-        print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con: '{nom}'"))
-        print("{}".format("-"*93))
-        print()
-        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
-        print("{}".format("-"*93))
-        print()
-        for j in range (len(arr_filtro)):
-            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+        if arr_filtro:
+            print()
+            print("{:<2} {}".format("", f"Coinciden {len(arr_filtro)} películas con: '{nom}'"))
             print("{}".format("-"*93))
-        print()
+            print()
+            print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
+            print("{}".format("-"*93))
+            print()
+            for j in range (len(arr_filtro)):
+                print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(arr_filtro[j].id,arr_filtro[j].nombre, arr_filtro[j].genero, arr_filtro[j].anio, f"$ {arr_filtro[j].precio}" ))
+                print("{}".format("-"*93))
+            print()
+        else:
+            print("{:<2} {}".format("", f"No coincide ninguna pelicula con la palabra: '{nom}'"))
+            time.sleep(2)
+            limpiar_pantalla()
+            opcion_submenu = input("{:<2} {}".format("", "Ingrese el nombre de la pelicula que busca (o una parte): "))
+            print("{}".format("-" * 93))
+            fil_nombre(opcion_submenu)
+
 
     del arr_filtro
     #Opciones para poder alquilar una película o para volver al menú
@@ -351,7 +389,7 @@ def fil_nombre(nom):
     while not (opcion_submenu == 0 or opcion_submenu == 1):
         opcion_submenu = int(input("{:<2} {}".format("","Por favor, ingrese una opción válida: ")))
 
-    if opcion_submenu == 0: 
+    if opcion_submenu == 0:
         filtrar_peliculas()
     elif opcion_submenu == 1:
         alquilar_pelicula()
