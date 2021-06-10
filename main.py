@@ -72,6 +72,7 @@ def pelicula_aleatoria():
 #================== INICIO ALQUILAR PELÍCULA ===================================
 #--------------------- INICIO FUNCIÓN SELECCIONAR PELÍCULA ---------------------
 peliculas_alquiladas = []
+semanas_alquiladas = []
 def alquilar_pelicula():
     print()
     opcion_menu = int(input("¿cuántas películas desea alquilar?: "))
@@ -80,7 +81,15 @@ def alquilar_pelicula():
     
     i = 0
     while i < opcion_menu :
+        print()
         seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i+1)))
+
+         # VERIFICACIÓN SI LA PELICULA EXISTE DENTRO DEL RANGO DE ID's
+        while not seleccionar_peli < 20:
+            print()
+            print(f"No tenemos una pelicula identificada bajo el ID: {seleccionar_peli}")
+            print()
+            seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i + 1)))
 
         #Ciclo para evitar que ingresen la misma película dos veces
         for h in range(len(peliculas_alquiladas)):
@@ -104,14 +113,16 @@ def alquilar_pelicula():
                 print("{}".format("-"*93))
                 print("{:<3} Se agregó '{}' correctamente".format("", arr_pelis[j].nombre))
                 print("{}".format("-"*93))
+                print()
+                cantidad_dias = int(input("{:<3} {}".format("", "¿Cuántos días quiere alquilar la película? ")))
+                #Agregamos los días a la lista de semanas alquiladas
+                semanas_alquiladas.append(cantidad_dias)
                 #Agregamos las películas seleccionadas a la lista
                 peliculas_alquiladas.append(arr_pelis[j])
 
-        if seleccionar_peli > 20: # VERIFICACIÓN SI LA PELICULA EXISTE DENTRO DEL RANGO DE ID's
-            print()
-            print(f"No tenemos una pelicula identificada bajo el ID: {seleccionar_peli}")
-            print()
-            seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i + 1)))
+       
+       
+            
         
         i += 1
     #Función para que la pantalla se mantenga un tiempo antes de cambiar a la factura
@@ -122,20 +133,20 @@ def alquilar_pelicula():
 def mostrar_total_alquiler():
     limpiar_pantalla()
     sumar_precios = 0
-    print("{:^93}".format("Factura"))
-    print("{}".format(""*93))
+    print("{:^123}".format("Factura"))
+    print("{}".format("-"*123))
     print("Películas seleccionadas:")
-    print("{}".format("-"*93))
+    print("{}".format("-"*123))
     print()
-    print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>12}".format("Id","Título", "Género", "Año", "Precio"))
-    print("{}".format("-"*93))
+    print("{0:<3} {1:<50} {2:<12} {3:^12} {4:^12} {5:^12} {6:>12}".format("Id","Título", "Género", "Año", "Precio", "Cantidad Semanas", "Valor total"))
+    print("{}".format("-"*123))
     for i in range(len(peliculas_alquiladas)):
-        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:>11}".format(peliculas_alquiladas[i].id, peliculas_alquiladas[i].nombre, peliculas_alquiladas[i].genero, peliculas_alquiladas[i].anio, f"$ {peliculas_alquiladas[i].precio}"))
+        print("{0:<3} {1:<50} {2:<12} {3:^12} {4:^11} {5:^14} {6:^21}".format(peliculas_alquiladas[i].id, peliculas_alquiladas[i].nombre, peliculas_alquiladas[i].genero, peliculas_alquiladas[i].anio, f"$ {peliculas_alquiladas[i].precio}", semanas_alquiladas[i], f"$ {(semanas_alquiladas[i] * peliculas_alquiladas[i].precio)}"))
         print()
-        sumar_precios += peliculas_alquiladas[i].precio
-    print("{}".format("-"*93))
-    print("{:>77} {:>14}".format("Total",f"$ {sumar_precios}"))
-    print("{}".format("-"*93))
+        sumar_precios += (semanas_alquiladas[i]*peliculas_alquiladas[i].precio)
+    print("{}".format("-"*123))
+    print("{:>103} {:>18}".format("Total",f"$ {sumar_precios}"))
+    print("{}".format("-"*123))
 
     print("{:<2} {}".format("", "Digite 1 para agregar otra película"))
     print("{:<2} {}".format("", "Digite 0 para salir"))
@@ -151,6 +162,10 @@ def mostrar_total_alquiler():
         print()
         print("{:<2} {}".format("", "Gracias por utilizar nuestro sistema, ¡vuelva pronto!"))
         time.sleep(2)
+        #Eliminamos los datos de la lista semana_alquiler
+        semanas_alquiladas.clear()
+        #Eliminamos los datos de la lista películas alquiladas
+        peliculas_alquiladas.clear()
         menu()
 #--------------- FIN FUNCIÓN MOSTRAR FACTURA -----------------------------------
 #======================= FIN ALQUILAR PELÍCULA =================================
