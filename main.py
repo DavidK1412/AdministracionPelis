@@ -85,7 +85,7 @@ def alquilar_pelicula():
         seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i+1)))
 
          # VERIFICACIÓN SI LA PELICULA EXISTE DENTRO DEL RANGO DE ID's
-        while not seleccionar_peli < 20:
+        while not seleccionar_peli <= 20:
             print()
             print(f"No tenemos una pelicula identificada bajo el ID: {seleccionar_peli}")
             print()
