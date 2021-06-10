@@ -113,7 +113,7 @@ def alquilar_pelicula():
                 print("{:<3} Se agregó '{}' correctamente".format("", arr_pelis[j].nombre))
                 print("{}".format("-"*93))
                 print()
-                cantidad_dias = int(input("{:<3} {}".format("", "¿Cuántos días quiere alquilar la película? ")))
+                cantidad_dias = int(input("{:<3} {}".format("", "¿Cuántas semanas quiere alquilar la película? ")))
                 print()
                 #Agregamos los días a la lista de semanas alquiladas
                 semanas_alquiladas.append(cantidad_dias)
