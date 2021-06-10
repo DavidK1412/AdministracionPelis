@@ -81,7 +81,6 @@ def alquilar_pelicula():
     
     i = 0
     while i < opcion_menu :
-        print()
         seleccionar_peli = int(input("Digite el ID de la película #{} deseada: ".format(i+1)))
 
          # VERIFICACIÓN SI LA PELICULA EXISTE DENTRO DEL RANGO DE ID's
