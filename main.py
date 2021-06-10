@@ -267,7 +267,7 @@ def fil_gen(inp):
     
     #Opciones para poder alquilar una película o para volver al menú
     print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
-    print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
+    print("{:<2} {}".format("", "Digite 0 si desea volver al menú"))
     opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
     #Validamos que los datos ingresados sean correctos
@@ -310,7 +310,7 @@ def fil_pre(p_max):
     del arr_filtro
     #Opciones para poder alquilar una película o para volver al menú
     print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
-    print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
+    print("{:<2} {}".format("", "Digite 0 si desea volver al menú"))
     opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
     #Validamos que los datos ingresados sean correctos
@@ -352,7 +352,7 @@ def fil_anio(anio):
     del arr_filtro
     #Opciones para poder alquilar una película o para volver al menú
     print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
-    print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
+    print("{:<2} {}".format("", "Digite 0 si desea volver al menú"))
     opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
     #Validamos que los datos ingresados sean correctos
@@ -398,7 +398,7 @@ def fil_nombre(nom):
     del arr_filtro
     #Opciones para poder alquilar una película o para volver al menú
     print("{:<2} {}".format("", "Digite 1 si desea alquilar alguna de estas películas"))
-    print("{:<2} {}".format("", "Digite 2 si desea volver al menú"))
+    print("{:<2} {}".format("", "Digite 0 si desea volver al menú"))
     opcion_submenu = int(input("{:<2} {}".format("","Ingrese una opción: ")))
 
     #Validamos que los datos ingresados sean correctos
