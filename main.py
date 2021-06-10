@@ -114,6 +114,7 @@ def alquilar_pelicula():
                 print("{}".format("-"*93))
                 print()
                 cantidad_dias = int(input("{:<3} {}".format("", "¿Cuántos días quiere alquilar la película? ")))
+                print()
                 #Agregamos los días a la lista de semanas alquiladas
                 semanas_alquiladas.append(cantidad_dias)
                 #Agregamos las películas seleccionadas a la lista
